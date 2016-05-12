@@ -16,7 +16,8 @@ class Language extends Model
      */
     protected $fillable = [
        'Language',
-  		'Level_of_fluency'
+  		'Level_of_fluency',
+        'users_id'
     ];
 
     /**
@@ -27,4 +28,8 @@ class Language extends Model
     protected $hidden = [
         'remember_token',
     ];
+
+    // public function Users(){
+    //  return $this->belongsTo('App\Users','users_id');
+    // }
 }

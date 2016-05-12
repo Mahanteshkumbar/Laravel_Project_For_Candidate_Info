@@ -6,7 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Update Profile</div>
                 <div class="panel-body"> 
-                    {!! Form::open(['url'=>'candidate/experience']) !!}
+                    {!! Form::model($task, ['method' => 'put','url' => ['/candidate/experience', $task->id]]) !!}
 
                         <div class="form-group">
                             {!! Form::label('Company name') !!}

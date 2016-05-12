@@ -17,10 +17,10 @@ class Experience extends Model
     protected $fillable = [
         'Company_name', 
 		  'Start_year', 
-		  'End_year', 
-		  'Work_history_id', 
+		  'End_year', 		  
 		  'Designation',
-		  'Exp_summary'
+		  'Exp_summary',
+          'users_id'
     ];
 
     /**
@@ -31,4 +31,8 @@ class Experience extends Model
     protected $hidden = [
         'remember_token',
     ];
+
+    // public function Users(){
+    //  return $this->belongsTo('App\Users','users_id');
+    // }
 }

@@ -15,14 +15,14 @@ class CreateExperienceTable extends Migration
         Schema::create('experiences', function (Blueprint $table) {
            $table->increments('id');
           $table->string('Company_name'); 
-          $table->string('Start_year');
-          $table->string('End_year');
-          $table->string('Work_history_id');
+          $table->date('Start_year');
+          $table->date('End_year');
+          //$table->string('Work_history_id');
           $table->string('Designation');
           $table->string('Exp_summary');
           $table->integer('users_id')->unsigned()->nullable();
-            $table->foreign('users_id')->references('id')->on('users');
-            $table->timestamps();
+          $table->foreign('users_id')->references('id')->on('users');
+          $table->timestamps();
         });
     }
 

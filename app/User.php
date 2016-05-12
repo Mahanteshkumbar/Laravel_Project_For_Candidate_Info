@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -29,15 +28,26 @@ class User extends Authenticatable
     }
 
     public function Education(){
-        return $this->belongsTo('App\Education','profiles_id');
+        return $this->belongsTo('App\Education','users_id');
     }
 
     public function Language(){
-        return $this->belongsTo('App\Language','profiles_id');
+        return $this->belongsTo('App\Language','users_id');
     }
 
     public function Experience(){
-        return $this->belongsTo('App\Education','profiles_id');
+        return $this->belongsTo('App\Education','users_id');
     }
 
+    public function Skill(){
+        return $this->belongsTo('App\Skill','users_id');
+    }
+
+    public function Jobpost(){
+        return $this->belongsTo('App\Jobpost','users_id');
+    }
+
+    public function Images(){
+        return $this->belongsTo('App\Images','users_id');
+    }    
 }
