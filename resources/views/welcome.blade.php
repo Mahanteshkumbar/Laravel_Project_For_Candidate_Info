@@ -201,6 +201,52 @@
 
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Hobby <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/hobbyview') }}">Add New</a></h1>
+
+                    <ul>
+                        @foreach($hobby_info as $hobby)
+                            <li>Hobby : {{$hobby->hname}}  
+                                <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/hobby/'.$hobby->id) }}"><i class="fa fa-pencil"></i></a>
+
+                                <p style="display:inline-block;padding:right:10px;">{!! Form::open([
+                                    'method' => 'DELETE',
+                                    'url' => ['/candidate/del/hobby',$hobby->id]
+                                ]) !!}
+                                    {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
+                                {!! Form::close() !!}
+                                </p>
+                            </li>                       
+                        @endforeach     
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Awards <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/awardview') }}">Add New</a></h1>
+
+                    <ul>
+                        @foreach($award_info as $awds)
+                            <li>Award : {{$awds->award}} : Organisation : {{$awds->org}} : Year : {{$awds->year}} :
+                                <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/award/'.$awds->id) }}"><i class="fa fa-pencil"></i></a>
+
+                                <p style="display:inline-block;padding:right:10px;">{!! Form::open([
+                                    'method' => 'DELETE',
+                                    'url' => ['/candidate/del/award',$awds->id]
+                                ]) !!}
+                                    {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
+                                {!! Form::close() !!}
+                                </p>
+                            </li>                       
+                        @endforeach     
+                    </ul>
+
+                </div>
+            </div>
         </div>
  
         <div class="col-md-2">

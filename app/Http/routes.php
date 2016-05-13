@@ -8,7 +8,9 @@ use App\Education;
 use App\Skills;
 use App\Jobpost;
 use App\Images;
+use App\Hobby;
 use App\Filemodel;
+use App\Awards;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +41,11 @@ Route::get('/', function () {
 
 		$File_path = Filemodel::where('users_id','=', Auth::user()->id)->get();
 
-    	return view('welcome',compact('candidate_details','languages_info','experience_info','education_info','skills_info','Jobpost_info','Image_path','File_path'));
+		$hobby_info = Hobby::where('users_id','=', Auth::user()->id)->get();
+
+		$award_info = Awards::where('users_id','=', Auth::user()->id)->get();
+
+    	return view('welcome',compact('candidate_details','languages_info','experience_info','education_info','skills_info','Jobpost_info','Image_path','File_path','hobby_info','award_info'));
 	}else{
 		return view('welcome');
 	}
@@ -125,6 +131,16 @@ Route::put('/candidate/jobpost/{id}', 'JobpostController@editlang');
 Route::delete('/candidate/del/jobpost/{id}', 'JobpostController@deletelang');
 Route::post('/candidate/jobpost', 'JobpostController@store');
 
+//Hobby
+Route::get('/candidate/hobby', 'HobbyController@show');
+Route::get('/candidate/hobbyview', function(){
+	//$candidate_details = Reguser::All();
+	return view('hobby');
+});
+Route::get('/candidate/hobby/{id}', 'HobbyController@edit');
+Route::put('/candidate/hobby/{id}', 'HobbyController@editlang');
+Route::delete('/candidate/del/hobby/{id}', 'HobbyController@deletelang');
+Route::post('/candidate/hobby', 'HobbyController@store');
 
 //Image upload
 //Route::get('/candidate/imageupload', 'ImageController@show');
@@ -147,3 +163,14 @@ Route::get('/candidate/fileupload/{id}', 'FilemodelController@edit');
 Route::put('/candidate/fileupload/{id}', 'FilemodelController@editlang');
 Route::delete('/candidate/del/fileupload/{id}', 'FilemodelController@deletelang');
 Route::post('/candidate/fileupload', 'FilemodelController@store');
+
+//Hobby
+Route::get('/candidate/award', 'AwardsController@show');
+Route::get('/candidate/awardview', function(){
+	//$candidate_details = Reguser::All();
+	return view('award');
+});
+Route::get('/candidate/award/{id}', 'AwardsController@edit');
+Route::put('/candidate/award/{id}', 'AwardsController@editlang');
+Route::delete('/candidate/del/award/{id}', 'AwardsController@deletelang');
+Route::post('/candidate/award', 'AwardsController@store');
