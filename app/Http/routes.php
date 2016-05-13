@@ -7,6 +7,9 @@ use App\Experience;
 use App\Education;
 use App\Skills;
 use App\Jobpost;
+use App\Images;
+use App\Filemodel;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -32,7 +35,11 @@ Route::get('/', function () {
 
 		$Jobpost_info = Jobpost::where('users_id', '=', Auth::user()->id)->get();
 
-    	return view('welcome',compact('candidate_details','languages_info','experience_info','education_info','skills_info','Jobpost_info'));
+		$Image_path = Images::where('users_id', '=', Auth::user()->id)->get();
+
+		$File_path = Filemodel::where('users_id','=', Auth::user()->id)->get();
+
+    	return view('welcome',compact('candidate_details','languages_info','experience_info','education_info','skills_info','Jobpost_info','Image_path','File_path'));
 	}else{
 		return view('welcome');
 	}
@@ -125,7 +132,18 @@ Route::get('/candidate/imageuplview', function(){
 	//$candidate_details = Reguser::All();
 	return view('imageupload');
 });
-// Route::get('/candidate/imageupload/{id}', 'ImageController@edit');
-// Route::put('/candidate/imageupload/{id}', 'ImageController@editlang');
-//Route::delete('/candidate/del/imageupload/{id}', 'ImageController@deletelang');
+Route::get('/candidate/imageupload/{id}', 'ImageController@edit');
+Route::put('/candidate/imageupload/{id}', 'ImageController@editlang');
+Route::delete('/candidate/del/imageupload/{id}', 'ImageController@deletelang');
 Route::post('/candidate/imageupload', 'ImageController@store');
+
+//File upload
+//Route::get('/candidate/imageupload', 'ImageController@show');
+Route::get('/candidate/fileuplview', function(){
+	//$candidate_details = Reguser::All();
+	return view('fileupload');
+});
+Route::get('/candidate/fileupload/{id}', 'FilemodelController@edit');
+Route::put('/candidate/fileupload/{id}', 'FilemodelController@editlang');
+Route::delete('/candidate/del/fileupload/{id}', 'FilemodelController@deletelang');
+Route::post('/candidate/fileupload', 'FilemodelController@store');

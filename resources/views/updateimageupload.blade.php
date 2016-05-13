@@ -7,12 +7,12 @@
                 <div class="panel-heading"></div>
                 <div class="panel-body"> 
                     <h1>Upload form</h1>
-                    @if($errors->any())
+                    <!-- @if($errors->any())
                         @foreach($errors->all() as $error)
                         <div class="alert alert-danger">{{$error}}</div>
                         @endforeach
-                    @endif
-                    {!! Form::open(['url'=>'/candidate/imageupload','method'=>'POST', 'files'=>true]) !!}
+                    @endif -->
+                     {!! Form::model($task, ['method' => 'put','url' => ['/candidate/imageupload', $task->id], 'files'=>true]) !!}
 
                     <div class="form-group">                      
                         {!! Form::label('Image') !!}

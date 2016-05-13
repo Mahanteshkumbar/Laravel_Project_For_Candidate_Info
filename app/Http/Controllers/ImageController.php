@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Images;
 use Auth;
+use App\Http\Requests\ImageCreateRequest;
 
 //use App\Http\Controllers\Input;
 use Input;
@@ -28,7 +29,7 @@ class ImageController extends Controller
 
     public function edit($id = null) {
         $task = Images::findOrFail($id);
-        return view('updatelang',compact('task'));
+        return view('updateimageupload',compact('task'));
        //return 'Hiiiii';
     }
 
@@ -37,22 +38,23 @@ class ImageController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    public function store(Request $request){  
-    	$imageName = Auth::user()->id . '.' . 
-        $request->file('image')->getClientOriginalExtension();
-	    $getpath = $request->file('image')->move(
-	        base_path() . '/public/images/', $imageName
-	    );
+    public function store(ImageCreateRequest $request){  
+    	$imageName = Auth::user()->id . '.' . $request->file('image')->getClientOriginalExtension();
+	    $getpath = $request->file('image')->move('images/',$imageName);
+        //$task->fill($getpath)->save();
 
 	    Images::create([        
         'imagepath' => $getpath,
-        'users_id' => Auth::user()->id]);
-	    return view('home');
+        'users_id' => Auth::user()->id
+        ]);
+        return view('home');  
     }
 
 
-     public function editlang($id, Request $request){
-        $task = Images::findOrFail($id);        
+     public function editlang($id, ImageCreateRequest $request){
+        $task = Images::findOrFail($id); 
+        $imageName = Auth::user()->id . '.' . $request->file('image')->getClientOriginalExtension();
+        $getpath = $request->file('image')->move('images/',$imageName);               
         $input = $request->all();
         $task->fill($input)->save();
         return view('home');

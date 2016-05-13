@@ -12,10 +12,10 @@
                         <div class="alert alert-danger">{{$error}}</div>
                         @endforeach
                     @endif
-                    {!! Form::open(['url'=>'/candidate/imageupload','method'=>'POST', 'files'=>true]) !!}
+                    {!! Form::open(['url'=>'/candidate/fileupload','method'=>'POST', 'files'=>true]) !!}
 
                     <div class="form-group">                      
-                        {!! Form::label('Image') !!}
+                        {!! Form::label('File') !!}
                         {!! Form::file('image', null) !!} 
                     </div>
                   {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}

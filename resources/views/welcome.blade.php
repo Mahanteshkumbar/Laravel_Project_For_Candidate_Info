@@ -4,9 +4,31 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2">
+            @foreach($Image_path as $imgp)
+                {{ Html::image($imgp->imagepath, 'logo',array( 'width' => 70, 'height' => 70, 'class' => 'img-circle' )) }}
+            @endforeach
+            
+            @if(count($Image_path) == 0)
             <h3><a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/imageuplview') }}">Add Image</a></h3>
-            <img src="{{url('C:\Laravell Examples\practicelaravel\public\images\1.png')}}" alt="..." class="img-circle">
-            </div>
+            @endif         
+
+            @if(count($Image_path) > 0)            
+                @foreach($Image_path as $imgp)
+                <br>
+                        <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/imageupload/'.$imgp->id) }}"><i class="fa fa-pencil"></i></a>
+
+                        <p style="display:inline-block;padding:right:10px;">{!! Form::open([
+                            'method' => 'DELETE',
+                            'url' => ['/candidate/del/imageupload',$imgp->id]
+                        ]) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
+                        {!! Form::close() !!}
+                        </p>
+                @endforeach
+            @endif
+            <!-- <img src="{{url('images\1.png')}}" alt="..." class="img-circle"> -->
+            
+        </div>
 
         <div class="col-md-8">           
             <h1 style="display:inline-block;">{{ Auth::user()->name }}</h1>
@@ -182,7 +204,30 @@
         </div>
  
         <div class="col-md-2">
-            <h1>Side</h1>
+            @foreach($File_path as $filep)
+             <b>Added</b> : {{$filep->filepath}}            
+            @endforeach
+            
+            @if(count($File_path) == 0)
+            <h3><a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/fileuplview') }}">Add File</a></h3>            
+            <!-- <img src="{{url('images\1.png')}}" alt="..." class="img-circle"> -->
+            @endif         
+
+            @if(count($File_path) > 0)            
+                @foreach($File_path as $filep)
+                <br>
+                        <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/fileupload/'.$filep->id) }}"><i class="fa fa-pencil"></i></a>
+
+                        <p style="display:inline-block;padding:right:10px;">{!! Form::open([
+                            'method' => 'DELETE',
+                            'url' => ['/candidate/del/fileupload',$filep->id]
+                        ]) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
+                        {!! Form::close() !!}
+                        </p>
+                @endforeach
+            @endif
+            
         </div>
     </div>
 </div>
