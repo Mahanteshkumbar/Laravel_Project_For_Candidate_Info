@@ -24,30 +24,30 @@ class User extends Authenticatable
     ];
 
     public function Profile(){
-       return $this->belongsTo('App\Profile','users_id');
+       return $this->belongsTo('App\Profile');
     }
 
-    public function Education(){
-        return $this->belongsTo('App\Education','users_id');
+    public function education(){
+        return $this->belongsTo('App\Education');
     }
 
     public function Language(){
-        return $this->belongsTo('App\Language','users_id');
+        return $this->belongsTo('App\Language');
     }
 
     public function Experience(){
-        return $this->belongsTo('App\Education','users_id');
+        return $this->belongsTo('App\Experience');
     }
 
     public function Skill(){
-        return $this->belongsTo('App\Skill','users_id');
+        return $this->belongsTo('App\Skill');
     }
 
     public function Jobpost(){
-        return $this->belongsTo('App\Jobpost','users_id');
+        return $this->belongsTo('App\Jobpost');
     }
 
     public function Images(){
-        return $this->belongsTo('App\Images','users_id');
+        return $this->belongsTo('App\Images');
     }    
 }

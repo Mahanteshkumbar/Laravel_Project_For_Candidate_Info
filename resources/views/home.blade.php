@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
                 <div class="panel-body">
                     <h1>All right..</h1>                    
-                    <h3>Keep on going!</h3>
+                    <h3>Keep on going!</h3>                    
                 </div>
             </div>
         </div>

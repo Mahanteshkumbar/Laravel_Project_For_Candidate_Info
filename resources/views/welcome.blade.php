@@ -32,7 +32,7 @@
 
         <div class="col-md-8">           
             <h1 style="display:inline-block;">{{ Auth::user()->name }}</h1>
-            <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/profile/'. Auth::user()->id) }}"><i class="fa fa-pencil"></i></a>
+            <!-- <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/profile/'. Auth::user()->id) }}"><i class="fa fa-pencil"></i></a> -->
 
             <div class="row">
                 <div class="col-md-6">
@@ -78,17 +78,21 @@
 
                         <ul>
                             @foreach($experience_info as $exp)
-                                <li>{{$exp->Company_name}} : {{$exp->Start_year}} : {{$exp->End_year}} : {{$exp->Designation}} : {{$exp->Exp_summary}} : 
                                     <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/experience/'.$exp->id) }}"><i class="fa fa-pencil"></i></a>
 
                                     <p style="display:inline-block;padding:right:10px;">{!! Form::open([
                                         'method' => 'DELETE',
-                                        'url' => ['/candidate/del/languages',$exp->id]
+                                        'url' => ['/candidate/del/experience',$exp->id]
                                     ]) !!}
                                         {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                     {!! Form::close() !!}
-                                    </p>
-                                </li>                       
+                                    </p> 
+                                <p><b>Company Name:</b>{{$exp->Company_name}}</p> 
+                                    <p><b>Start year:</b>{{$exp->Start_year}}</p>  
+                                    <p><b>End year:</b> {{$exp->End_year}}</p> 
+                                    <p><b>Designation:</b> {{$exp->Designation}}</p>  
+                                    <p><b>Experience Summary:</b> {{$exp->Exp_summary}} </p>
+                                                     
                             @endforeach     
                         </ul>
                     
@@ -100,8 +104,7 @@
                     <h1>Education Details
                         <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/educationview') }}">Add New</a></h1>
                     <ul>
-                            @foreach($education_info as $edu)
-                                <li>{{$edu->name_of_university}} : {{$edu->course}} : {{$edu->aggregate}} :  
+                            @foreach($education_info as $edu)                                                
                                     <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/experience/'.$edu->id) }}"><i class="fa fa-pencil"></i></a>
 
                                     <p style="display:inline-block;padding:right:10px;">{!! Form::open([
@@ -110,8 +113,10 @@
                                     ]) !!}
                                         {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                     {!! Form::close() !!}
-                                    </p>
-                                </li>                       
+                                    </p> 
+                                <p><b>name of university:</b> {{$edu->name_of_university}}</p>
+                                <p><b>Course:</b>{{$edu->course}}</p>
+                                <p><b>Aggregate:</b>{{$edu->aggregate}}</p>                                                  
                             @endforeach     
                         </ul>                                         
                 </div>
@@ -123,7 +128,6 @@
                         <!-- {{$languages_info}} -->
                         <ul>
                             @foreach($languages_info as $lang)
-                                <li>{{$lang->Language}} : {{$lang->Level_of_fluency}} : 
                                     <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/languages/'.$lang->id) }}"><i class="fa fa-pencil"></i></a>
 
                                     <p style="display:inline-block;padding:right:10px;">{!! Form::open([
@@ -132,8 +136,9 @@
                                     ]) !!}
                                         {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                     {!! Form::close() !!}
-                                    </p>
-                                </li>                       
+                                    </p>  
+                                <p><b>Language:</b>{{$lang->Language}}</p>
+                                <p><b>Level of fluency:</b>{{$lang->Level_of_fluency}} </p>                                                 
                             @endforeach     
                         </ul>
                     
@@ -145,8 +150,7 @@
                     <h1>Skills <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/skillview') }}">Add New</a></h1>
 
                      <ul>
-                        @foreach($skills_info as $skill)
-                            <li>{{$skill->skill}} : {{$skill->efficiency}} : {{$skill->yoe}} : 
+                        @foreach($skills_info as $skill)                            
                                 <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/skill/'.$skill->id) }}"><i class="fa fa-pencil"></i></a>
 
                                 <p style="display:inline-block;padding:right:10px;">{!! Form::open([
@@ -156,7 +160,9 @@
                                     {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                 {!! Form::close() !!}
                                 </p>
-                            </li>                       
+                            <p><b>Skill:</b>{{$skill->skill}}</p>
+                            <p><b>Efficiency:</b>{{$skill->efficiency}}</p> 
+                            <p><b>Year of experience:</b>{{$skill->yoe}}</p>                                                  
                         @endforeach     
                         </ul>
 
@@ -170,22 +176,7 @@
 
 
                      <ul>
-                        @foreach($Jobpost_info as $jobpost)
-                            <li>
-                                'Job_title', {{$jobpost->Job_title}}
-                                'Job_description', {{$jobpost->Job_description}}     
-                                'Job_post_date', {{$jobpost->Job_post_date}}
-                                'Job_expiry_date', {{$jobpost->Job_expiry_date}}
-                                'job_salary', {{$jobpost->job_salary}}
-                                'Employment_type', {{$jobpost->Employment_type}}
-                                'Contract_type', {{$jobpost->Contract_type}}
-                                'Industry',  {{$jobpost->Industry}}
-                                'Function',  {{$jobpost->Function}}       
-                                'Job_experience1', {{$jobpost->Job_experience1}}
-                                'Job_experience2', {{$jobpost->Job_experience2}}
-                                'Job_type', {{$jobpost->Job_type}}
-                                'Job_qualification' {{$jobpost->Job_qualification}}
-
+                        @foreach($Jobpost_info as $jobpost)  
                                 <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/jobpost/'.$jobpost->id) }}"><i class="fa fa-pencil"></i></a>
 
                                 <p style="display:inline-block;padding:right:10px;">{!! Form::open([
@@ -195,7 +186,19 @@
                                     {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                 {!! Form::close() !!}
                                 </p>
-                            </li>                       
+                                 <p><b>Job_title:</b>{{$jobpost->Job_title}}</p>
+                                <p><b>Job_description:</b> {{$jobpost->Job_description}}</p>    
+                                <p><b>Job_post_date:</b> {{$jobpost->Job_post_date}}</p>
+                                <p><b>Job_expiry_date:</b> {{$jobpost->Job_expiry_date}}</p>
+                                <p><b>job_salary:</b> {{$jobpost->job_salary}}</p>
+                                <p><b>Employment_type:</b> {{$jobpost->Employment_type}}</p>
+                                <p><b>Contract_type:</b> {{$jobpost->Contract_type}}</p>
+                                <p><b>Industry:</b>  {{$jobpost->Industry}}</p>
+                                <p><b>Function:</b>  {{$jobpost->Function}}</p>       
+                                <p><b>Job_experience1:</b> {{$jobpost->Job_experience1}}</p> 
+                                <p><b>Job_experience2:</b> {{$jobpost->Job_experience2}}</p> 
+                                <p><b>Job_type:</b> {{$jobpost->Job_type}}</p> 
+                                <p><b>Job_qualification:</b> {{$jobpost->Job_qualification}}</p>                                                  
                         @endforeach     
                         </ul>
 
@@ -208,7 +211,7 @@
 
                     <ul>
                         @foreach($hobby_info as $hobby)
-                            <li>Hobby : {{$hobby->hname}}  
+                              
                                 <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/hobby/'.$hobby->id) }}"><i class="fa fa-pencil"></i></a>
 
                                 <p style="display:inline-block;padding:right:10px;">{!! Form::open([
@@ -218,7 +221,9 @@
                                     {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                 {!! Form::close() !!}
                                 </p>
-                            </li>                       
+
+                                <p><b>Hobby :</b> {{$hobby->hname}}</p>
+                                                  
                         @endforeach     
                     </ul>
 
@@ -230,8 +235,7 @@
                     <h1>Awards <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/awardview') }}">Add New</a></h1>
 
                     <ul>
-                        @foreach($award_info as $awds)
-                            <li>Award : {{$awds->award}} : Organisation : {{$awds->org}} : Year : {{$awds->year}} :
+                        @foreach($award_info as $awds)                           
                                 <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/award/'.$awds->id) }}"><i class="fa fa-pencil"></i></a>
 
                                 <p style="display:inline-block;padding:right:10px;">{!! Form::open([
@@ -241,7 +245,10 @@
                                     {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                 {!! Form::close() !!}
                                 </p>
-                            </li>                       
+
+                            <p><b>Award :</b> {{$awds->award}}</p> 
+                            <p><b>Organisation :</b> {{$awds->org}}</p> 
+                            <p><b>Year:</b> {{$awds->year}}</p>                                              
                         @endforeach     
                     </ul>
 
@@ -251,7 +258,7 @@
  
         <div class="col-md-2">
             @foreach($File_path as $filep)
-             <b>Added</b> : {{$filep->filepath}}            
+             <b>Uploaded Resume</b> : {{$filep->filepath}}            
             @endforeach
             
             @if(count($File_path) == 0)
@@ -283,9 +290,9 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
+                <div class="panel-heading">Search Job</div>
                 <div class="panel-body">
-                    Your Application's Landing Page.
+                    <h1><a href="{{url('/candidate/searchjobview')}}">Search Job</a></h1>
                 </div>
             </div>
         </div>

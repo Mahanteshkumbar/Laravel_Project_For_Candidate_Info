@@ -17,7 +17,7 @@ class Education extends Model
          'name_of_university','course','aggregate','users_id'
     ];	
 
-    // public function Users(){
-    //  return $this->belongsTo('App\Users','users_id');
-    // }
+    public function users(){
+     return $this->belongsTo('App\User');
+    }
 }

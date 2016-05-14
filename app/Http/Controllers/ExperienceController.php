@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Http\Requests\WorkexpCreateRequest;
 use App\Experience;
 use Auth;
 
@@ -47,7 +48,7 @@ class ExperienceController extends Controller
     //     ]);
     // }
 
-    public function store(Request $request){        
+    public function store(WorkexpCreateRequest $request){        
         //return Auth::user()->id;
         $values = $request->All();
         $flash_message = 'Created successfully';
@@ -65,7 +66,7 @@ class ExperienceController extends Controller
     }
 
 
-     public function editlang($id, Request $request){
+     public function editlang($id, WorkexpCreateRequest $request){
         $task = Experience::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();

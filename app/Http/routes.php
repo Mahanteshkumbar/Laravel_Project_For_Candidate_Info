@@ -1,5 +1,4 @@
 <?php
-
 use App\User;
 use App\Profile;
 use App\Language;
@@ -32,6 +31,13 @@ Route::get('/', function () {
 		$experience_info = Experience::where('users_id', '=', Auth::user()->id)->get();
 		
 		$education_info = Education::where('users_id', '=', Auth::user()->id)->get();
+
+		//Eloquent relationships one to many
+		// $edu = Education::all();
+		// // Blade template
+		// foreach($edu as $e){
+		// 	return $e->users;
+		// }
 
 		$skills_info = Skills::where('users_id', '=', Auth::user()->id)->get();
 
@@ -174,3 +180,11 @@ Route::get('/candidate/award/{id}', 'AwardsController@edit');
 Route::put('/candidate/award/{id}', 'AwardsController@editlang');
 Route::delete('/candidate/del/award/{id}', 'AwardsController@deletelang');
 Route::post('/candidate/award', 'AwardsController@store');
+
+
+//Search Job
+Route::post('/candidate/searchjob', 'SearchController@show');
+Route::get('/candidate/searchjobview', function(){
+	//$candidate_details = Reguser::All();
+	return view('search');
+});

@@ -33,6 +33,6 @@ class Experience extends Model
     ];
 
     // public function Users(){
-    //  return $this->belongsTo('App\Users','users_id');
+    //  return $this->belongsTo('App\User','users_id');
     // }
 }

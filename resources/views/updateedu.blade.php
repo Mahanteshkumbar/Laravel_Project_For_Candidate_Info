@@ -6,6 +6,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Update Profile</div>
                 <div class="panel-body"> 
+                    @if($errors->any())
+                        @foreach($errors->all() as $error)
+                        <div class="alert alert-danger">{{$error}}</div>
+                        @endforeach
+                    @endif
                     {!! Form::model($task, ['method' => 'put','url' => ['/candidate/education', $task->id]]) !!}
                         <div class="form-group">
                             {!! Form::label('name_of_university') !!}

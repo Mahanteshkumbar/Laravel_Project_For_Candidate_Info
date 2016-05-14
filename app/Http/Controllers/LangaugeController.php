@@ -53,7 +53,7 @@ class LangaugeController extends Controller
         'Language' => $request->get('Language'),
         'Level_of_fluency' => $request->get('Level_of_fluency'),
         'users_id' => Auth::user()->id]);
-        return view('language',compact('flash_message'));
+        return view('home');
 
         //$inputs->save();
     }

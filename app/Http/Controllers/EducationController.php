@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Http\Requests\EducationCreateRequest;
 use App\Education;
 use Auth;
 
@@ -47,7 +46,7 @@ class EducationController extends Controller
     //     ]);
     // }
 
-    public function store(Request $request){        
+    public function store(EducationCreateRequest $request){        
         //return Auth::user()->id;
         $values = $request->All();
         $flash_message = 'Created successfully';
@@ -62,7 +61,7 @@ class EducationController extends Controller
     }
 
 
-     public function editlang($id, Request $request){
+     public function editlang($id, EducationCreateRequest $request){
         $task = Education::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();

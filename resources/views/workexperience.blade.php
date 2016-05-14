@@ -6,6 +6,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Update Profile</div>
                 <div class="panel-body"> 
+
+                     @if($errors->any())
+                        @foreach($errors->all() as $error)
+                        <div class="alert alert-danger">{{$error}}</div>
+                        @endforeach
+                    @endif
+                    
                     {!! Form::open(['url'=>'candidate/experience']) !!}
 
                         <div class="form-group">

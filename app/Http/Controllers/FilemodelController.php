@@ -38,7 +38,10 @@ class FilemodelController extends Controller
     }
 
     public function store(Request $request){  
-    	$imageName = Auth::user()->id . '.' . $request->file('file')->getClientOriginalExtension();
+     // return pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME);
+
+
+    	$imageName = pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $request->file('file')->getClientOriginalExtension();
 	    $getpath = $request->file('file')->move('files/',$imageName);
         //$task->fill($getpath)->save();
 	    //->getClientOrginalName(); get file name
