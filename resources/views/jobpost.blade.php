@@ -14,13 +14,28 @@
 
                     {!! Form::open(['url'=>'candidate/jobpost']) !!}
                         <div class="form-group">
+                            {!! Form::label('Company Name') !!}
+                            {!! Form::text('Job_cmpny_name', null, 
+                                array(
+                                'class'=>'form-control', 
+                                      'placeholder'=>'Company Name')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('Location') !!}
+                            {!! Form::text('location', null, 
+                                array(
+                                'class'=>'form-control', 
+                                      'placeholder'=>'Company Name')) !!}
+                        </div>
+
+                        <div class="form-group">
                             {!! Form::label('Job title') !!}
                             {!! Form::text('Job_title', null, 
                                 array(
                                 'class'=>'form-control', 
                                       'placeholder'=>'Job_title')) !!}
                         </div>
-
 
                         <div class="form-group">
                             {!! Form::label('Job description') !!}
@@ -118,8 +133,6 @@
                                       'placeholder'=>'Job_qualification')) !!}
                         </div>
 
-                        
-                      
                         <div class="form-group">
                             {!! Form::submit('Add!', 
                               array('class'=>'btn btn-primary')) !!}

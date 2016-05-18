@@ -8,6 +8,8 @@ class Jobpost extends Model
 {
     //
     protected $fillable = [
+        'Job_cmpny_name',
+        'location',
 		'Job_title',
         'Job_description',		
 		'Job_post_date',

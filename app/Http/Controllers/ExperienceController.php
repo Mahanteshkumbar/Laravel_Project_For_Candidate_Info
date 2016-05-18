@@ -76,7 +76,7 @@ class ExperienceController extends Controller
      public function deletelang($id){
         $task = Experience::findOrFail($id);
         $task->delete();
-        return view('home');
+        //return view('workexperience');
 
      }
 }

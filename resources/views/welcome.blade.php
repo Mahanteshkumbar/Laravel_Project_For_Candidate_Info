@@ -186,7 +186,8 @@
                                     {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                 {!! Form::close() !!}
                                 </p>
-                                 <p><b>Job_title:</b>{{$jobpost->Job_title}}</p>
+                                <p><b>Job_cmpny_name:</b>{{$jobpost->Job_cmpny_name}}</p>
+                                <p><b>Job_title:</b>{{$jobpost->Job_title}}</p>
                                 <p><b>Job_description:</b> {{$jobpost->Job_description}}</p>    
                                 <p><b>Job_post_date:</b> {{$jobpost->Job_post_date}}</p>
                                 <p><b>Job_expiry_date:</b> {{$jobpost->Job_expiry_date}}</p>

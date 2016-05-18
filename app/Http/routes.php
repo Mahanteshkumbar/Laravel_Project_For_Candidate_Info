@@ -106,12 +106,14 @@ Route::post('/candidate/languages', 'LangaugeController@store');
 Route::get('/candidate/experience', 'ExperienceController@show');
 Route::get('/candidate/experienceview', function(){
 	//$candidate_details = Reguser::All();
-	return view('workexperience');
+	$experience_info = Experience::where('users_id', '=', Auth::user()->id)->get();
+		
+	return view('workexperience',compact('experience_info'));
 });
 //Route::get('/candidate/experience', 'ExperienceController@show');
 Route::get('/candidate/experience/{id}', 'ExperienceController@edit');
 Route::put('/candidate/experience/{id}', 'ExperienceController@editlang');
-Route::delete('/candidate/del/experience/{id}', 'ExperienceController@deletelang');
+Route::delete('/candidate/del/experience/{id?}', 'ExperienceController@deletelang');
 Route::post('/candidate/experience', 'ExperienceController@store');
 
 
@@ -141,6 +143,7 @@ Route::post('/candidate/jobpost', 'JobpostController@store');
 Route::get('/candidate/hobby', 'HobbyController@show');
 Route::get('/candidate/hobbyview', function(){
 	//$candidate_details = Reguser::All();
+	//$candidate_details = Reguser::All();	
 	return view('hobby');
 });
 Route::get('/candidate/hobby/{id}', 'HobbyController@edit');
@@ -186,5 +189,8 @@ Route::post('/candidate/award', 'AwardsController@store');
 Route::post('/candidate/searchjob', 'SearchController@show');
 Route::get('/candidate/searchjobview', function(){
 	//$candidate_details = Reguser::All();
-	return view('search');
+	$jobList = Jobpost::where('users_id', '=', Auth::user()->id)->get();
+		
+	return view('search',compact('jobList'));
+	//return view('search');
 });

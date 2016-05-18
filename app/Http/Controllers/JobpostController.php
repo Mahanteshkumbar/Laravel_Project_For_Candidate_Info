@@ -44,6 +44,8 @@ class JobpostController extends Controller
         $values = $request->All();
         $flash_message = 'Created successfully';
         Jobpost::create([
+            'Job_cmpny_name' => $request->get('Job_cmpny_name'),
+            'location' => $request->get('location'),
         	'Job_title' => $request->get('Job_title'),
 	        'Job_description' => $request->get('Job_description'),		
 			'Job_post_date' => $request->get('Job_post_date'),
