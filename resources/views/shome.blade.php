@@ -28,8 +28,8 @@
                         <p><b>Job_experience2:</b> {{$jobpost->Job_experience2}}</p> 
                         <p><b>Job_type:</b> {{$jobpost->Job_type}}</p> 
                         <p><b>Job_qualification:</b> {{$jobpost->Job_qualification}}</p> 
-                        <p><button class="btn btn-primary">Apply</button></p>
-                        <p><button class="btn btn-default">View</button></p>                    
+                        <p><a class="btn btn-primary" >Apply</a></p>
+                        <p><a class="btn btn-default" href="{{url('/jobview/'.$jobpost->id)}}">View</a></p>                    
                 </div>
             </div>
         </div>

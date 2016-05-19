@@ -176,7 +176,6 @@ Route::post('/candidate/fileupload', 'FilemodelController@store');
 //Hobby
 Route::get('/candidate/award', 'AwardsController@show');
 Route::get('/candidate/awardview', function(){
-	//$candidate_details = Reguser::All();
 	return view('award');
 });
 Route::get('/candidate/award/{id}', 'AwardsController@edit');
@@ -187,10 +186,14 @@ Route::post('/candidate/award', 'AwardsController@store');
 
 //Search Job
 Route::post('/candidate/searchjob', 'SearchController@show');
+Route::post('/candidate/advancejobsearch', 'SearchController@advanceshow');
 Route::get('/candidate/searchjobview', function(){
-	//$candidate_details = Reguser::All();
-	$jobList = Jobpost::where('users_id', '=', Auth::user()->id)->get();
-		
+	$jobList = Jobpost::All();		
 	return view('search',compact('jobList'));
-	//return view('search');
+});
+
+Route::get('/jobview/{id?}', function($id){
+	$jobLists = Jobpost::findorFail($id);		
+	return view('viewjob',compact('jobLists'));
+	//return $jobList;
 });
