@@ -24,6 +24,9 @@
         .fa-btn {
             margin-right: 6px;
         }
+        #app-layout{
+              background-color:#cbd0d3;
+        }
     </style>
 </head>
 <body id="app-layout">

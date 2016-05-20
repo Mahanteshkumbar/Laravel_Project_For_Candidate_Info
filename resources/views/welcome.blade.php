@@ -29,7 +29,7 @@
             <!-- <img src="{{url('images\1.png')}}" alt="..." class="img-circle"> -->
         </div>
 
-        <div class="col-md-8">           
+        <div class="col-md-8" style="background-color:#ecf0f1;">           
             <h1 style="display:inline-block;">{{ Auth::user()->name }}</h1>
             <!-- <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/profile/'. Auth::user()->id) }}"><i class="fa fa-pencil"></i></a> -->
 
@@ -399,7 +399,7 @@
   <div class="row">
     <div class="col-md-4">
       <h3><a href="{{url('/candidate/searchjobview')}}">Search Job</a></h3>
-      <h1><a href="{{url('/dashboard')}}">DI(Dependency Ejection)</a></h1>
+      <h4><a href="{{url('/dashboard')}}">Please login to see out put DI(Dependency Ejection)(Middlware Applied)</a></h4>
     </div>
   </div>
 </div>

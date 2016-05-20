@@ -23,6 +23,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //related to middleware Demo
+    public function isMan(){
+        return true;
+    }
+
     public function Profile(){
        return $this->belongsTo('App\Profile');
     }

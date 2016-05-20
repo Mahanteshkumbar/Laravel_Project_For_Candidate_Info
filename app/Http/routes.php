@@ -23,11 +23,7 @@ use App\Awards;
 */
 
 Route::auth();
-
-//protecting route from direct access
-Route::group(['middleware' => 'auth'], function () {
-   
-    Route::get('/', function () {	
+ Route::get('/', function () {	
 	if(Auth::user()){
 		$candidate_details = Profile::findorFail(Auth::user()->id);
 
@@ -61,6 +57,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('welcome');
 	}
 });
+
+//protecting route from direct access
+Route::group(['middleware' => 'auth'], function () {  
+   
 
 Route::get('/home', 'HomeController@index');
 
@@ -187,7 +187,8 @@ Route::put('/candidate/award/{id}', 'AwardsController@editlang');
 Route::delete('/candidate/del/award/{id}', 'AwardsController@deletelang');
 Route::post('/candidate/award', 'AwardsController@store');
 
-});
+});//close middleware auth
+
 
 //Search Job
 Route::post('/candidate/searchjob', 'SearchController@show');
@@ -203,4 +204,17 @@ Route::get('/jobview/{id?}', function($id){
 	//return $jobList;
 });
 
-Route::get('/dashboard','DependecyInjectionCtrl@dashboard');
+
+
+//middleware demo this url access only if isMan set to true in User class
+//this works only when user login its decalred in limited access
+/* 
+    * middleware may be assigned to groups or used individually.
+*/
+//if using route
+Route::get('/dashboard',['middleware'=> 'isMan', 'uses' => 'DependecyInjectionCtrl@dashboard']);
+
+//** if not usin route **
+// Route::get('/dashboard',['middleware'=> 'isMan', function(){
+// 	return 'All right!!! welcome Man!!';
+// }]);
