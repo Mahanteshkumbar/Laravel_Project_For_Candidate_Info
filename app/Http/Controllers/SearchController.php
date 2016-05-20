@@ -38,10 +38,10 @@ class SearchController extends Controller
 	     	//var_dump($temp_array);
 	     }else{
 	     	$jobList = Jobpost::where('Job_cmpny_name', 'like', '%'.$request->get('keywords').'%')
-	            ->orWhere('Job_title', 'like', '%'.$request->get('keywords').'%')
-	            ->orWhere('location', 'like','%'.$request->get('keywords').'%')
+	                    ->orWhere('Job_title', 'like', '%'.$request->get('keywords').'%')
+	                    ->orWhere('location', 'like','%'.$request->get('keywords').'%')
 	                    ->orWhere('Job_description', 'like','%'.$request->get('keywords').'%')
-	                     ->orWhere('Job_post_date', 'like', '%'.$request->get('keywords').'%')
+	                    ->orWhere('Job_post_date', 'like', '%'.$request->get('keywords').'%')
 	                     ->orWhere('job_salary', 'like', '%'.$request->get('keywords').'%')
 	                     ->orWhere('Employment_type', 'like', '%'.$request->get('keywords').'%')
 	                     ->orWhere('Contract_type', 'like', '%'.$request->get('keywords').'%')

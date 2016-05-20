@@ -22,7 +22,12 @@ use App\Awards;
 |
 */
 
-Route::get('/', function () {	
+Route::auth();
+
+//protecting route from direct access
+Route::group(['middleware' => 'auth'], function () {
+   
+    Route::get('/', function () {	
 	if(Auth::user()){
 		$candidate_details = Profile::findorFail(Auth::user()->id);
 
@@ -56,8 +61,6 @@ Route::get('/', function () {
 		return view('welcome');
 	}
 });
-
-Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
@@ -172,6 +175,7 @@ Route::get('/candidate/fileupload/{id}', 'FilemodelController@edit');
 Route::put('/candidate/fileupload/{id}', 'FilemodelController@editlang');
 Route::delete('/candidate/del/fileupload/{id}', 'FilemodelController@deletelang');
 Route::post('/candidate/fileupload', 'FilemodelController@store');
+Route::get('/file/download/{id}','FilemodelController@getDownload');
 
 //Hobby
 Route::get('/candidate/award', 'AwardsController@show');
@@ -183,6 +187,7 @@ Route::put('/candidate/award/{id}', 'AwardsController@editlang');
 Route::delete('/candidate/del/award/{id}', 'AwardsController@deletelang');
 Route::post('/candidate/award', 'AwardsController@store');
 
+});
 
 //Search Job
 Route::post('/candidate/searchjob', 'SearchController@show');
@@ -197,3 +202,5 @@ Route::get('/jobview/{id?}', function($id){
 	return view('viewjob',compact('jobLists'));
 	//return $jobList;
 });
+
+Route::get('/dashboard','DependecyInjectionCtrl@dashboard');

@@ -60,28 +60,47 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h1>Lists</h1>
-             @foreach($experience_info as $exp)
-                    <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/experience/'.$exp->id) }}"><i class="fa fa-pencil"></i></a>
+            <h1>List</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Company Name</th>
+                      <th>Start year</th>
+                      <th>End year</th>
+                      <th>Designation</th>
+                      <th>Experience Summary</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($experience_info as $exp)
+                    <tr class="success">
+                      <td>{{$exp->Company_name}}</td>
+                      <td>{{$exp->Start_year}}</td>
+                      <td>{{$exp->End_year}}</td>
+                      <td>{{$exp->Designation}}</td>
+                      <td>{{$exp->Exp_summary}}</td>
+                      <td>
+                         <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/experience/'.$exp->id) }}"><i class="fa fa-pencil"></i></a>
 
-                    <button type ="button" onclick="deleteExperience({{ $exp->id }})" id="Reco">Delete</button>
+                            <button type ="button" onclick="deleteExperience({{ $exp->id }})" id="Reco">Delete</button>
 
-                   <!--  <a href="#" data-id="{!!$exp->id!!}" value="{!!$exp->id!!}" class="delete">Delete </a> -->
+                           <!--  <a href="#" data-id="{!!$exp->id!!}" value="{!!$exp->id!!}" class="delete">Delete </a> -->
 
-                    <p style="display:inline-block;padding:right:10px;">
-                        {!! Form::open([
-                        'method' => 'DELETE',
-                        'id' => 'deleteProduct','url' => ['candidate/del/experience',$exp->id]]) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger deleteProduct','data-id' => $exp->id,'id' => 'btnDeleteProduct' ]) !!}
-                    {!! Form::close() !!}
-                    </p> 
-                <p><b>Company Name:</b>{{$exp->Company_name}}</p> 
-                <p><b>Start year:</b>{{$exp->Start_year}}</p>  
-                <p><b>End year:</b> {{$exp->End_year}}</p> 
-                <p><b>Designation:</b> {{$exp->Designation}}</p>  
-                <p><b>Experience Summary:</b> {{$exp->Exp_summary}} </p>
-                                     
-            @endforeach   
+                            <p style="display:inline-block;padding:right:10px;">
+                                {!! Form::open([
+                                'method' => 'DELETE',
+                                'id' => 'deleteProduct','url' => ['candidate/del/experience',$exp->id]]) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger deleteProduct','data-id' => $exp->id,'id' => 'btnDeleteProduct' ]) !!}
+                            {!! Form::close() !!}
+                            </p> 
+                       </td>
+                    </tr>  
+                    @endforeach                          
+                  </tbody>
+                </table>
+              </div>  
         </div>
     </div>
 </div>

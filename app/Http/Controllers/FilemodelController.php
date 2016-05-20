@@ -69,12 +69,9 @@ class FilemodelController extends Controller
 
      }
 
-    public function getDownload(){
-        $file= public_path(). "/fil/info.pdf";
-        $headers = array(
-              'Content-Type: application/pdf',
-            );
-        return Response::download($file, 'filename.pdf', $headers);
+    public function getDownload($id){       
+        $file = Filemodel::findOrFail($id); 
+        return response()->download($file->filepath);
 	}
 
 

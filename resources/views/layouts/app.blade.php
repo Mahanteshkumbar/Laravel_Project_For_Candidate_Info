@@ -58,7 +58,9 @@
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                         <li><a href="{{ url('/register/candidate') }}">Candidate Register</a></li>
+                        <li><a href="{{url('/candidate/searchjobview')}}">Search Job</a></li>
                     @else
+                        <li><a href="{{url('/candidate/searchjobview')}}">Search Job</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -80,13 +82,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-
-    <script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-        }
-    })    
     </script>
 </body>
 </html>
