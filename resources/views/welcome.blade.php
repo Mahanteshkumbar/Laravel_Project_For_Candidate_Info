@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-2">
             @foreach($Image_path as $imgp)
-                {{ Html::image($imgp->imagepath, 'logo',array( 'width' => 70, 'height' => 70, 'class' => 'img-circle' )) }}
+                {{ Html::image($imgp->imagepath, 'logo',array( 'width' => 100, 'height' => 100, 'class' => 'img-circle' )) }}
             @endforeach
             
             @if(count($Image_path) == 0)
@@ -37,7 +37,7 @@
                 <div class="col-md-6">
                     <!-- <h1>{{ $candidate_details }}</h1> -->
                     <p><b>Current Location:</b> {{$candidate_details->city}} </p>
-                    <p><b>Designation:</b> {{$candidate_details->status}}</p>
+                    <p><b>Designation:</b> {{$candidate_details->status}}</p> 
                     <p><b>Date of Birth:</b> {{$candidate_details->dob}}</p>
                    <!--  •   Current Designation: Not Mentioned
                     •   Current Company: Not Mentioned
@@ -292,7 +292,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Hobby <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/hobbyview') }}">Add New</a></h1>
+                    <h1>Hobby <a  style="display:inline-block;padding:right:10px;" title="Click !" href="{{ url('/candidate/hobbyview') }}">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/hobby/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
+
                     <div class="table-responsive">
                      <table class="table table-bordered">
                       <thead>
@@ -306,6 +307,7 @@
                         <tr class="success">
                           <td>{{$hobby->hname}}</td>
                           <td><a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/hobby/'.$hobby->id) }}"><i class="fa fa-pencil"></i></a>
+
 
                                 <p style="display:inline-block;padding:right:10px;">{!! Form::open([
                                     'method' => 'DELETE',

@@ -38,15 +38,23 @@ class HobbyController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'name_of_university' => 'required|max:255',
-    //         'course' => 'required',
-                //'aggregate' => 'required',
-           
-    //     ]);
-    // }
+    protected function showTrashed($id)
+    {
+        $hobby_trashed_info = Hobby::onlyTrashed()
+                ->where('users_id', $id)
+                ->get();
+       return view('trashed',compact('hobby_trashed_info'));
+    }
+
+    protected function restoreTrashed($id)
+    {
+        $hobby_trashed_info = Hobby::onlyTrashed()
+                ->where('id', $id)
+                ->restore();
+       return view('home');
+    }
+
+
 
     public function store(HobbyCreateRequest $request){        
         //return Auth::user()->id;

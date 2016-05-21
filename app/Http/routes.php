@@ -57,9 +57,24 @@ Route::auth();
 		return view('welcome');
 	}
 });
+//protecting route from direct access for web users multiple user login
+Route::group(['middleware' => 'admin'], function () {
 
-//protecting route from direct access
-Route::group(['middleware' => 'auth'], function () {  
+	Route::group(['middleware' => 'auth:admin'], function () {	
+		Route::get('/admin','AdminController@index');	
+	});
+	Route::get('/admin/login','AdminController@login');
+	Route::post('/admin/login','AdminController@postlogin');
+
+ 	// Registration Routes...
+    Route::get('/admin/register', 'AdminController@showRegistrationForm');
+    Route::post('/admin/register', 'AdminController@register');
+
+    Route::get('/admin/logout', 'AdminController@logout');
+});
+
+//protecting route from direct access for web users
+Route::group(['middleware' => 'web'], function () {  
    
 
 Route::get('/home', 'HomeController@index');
@@ -143,7 +158,7 @@ Route::delete('/candidate/del/jobpost/{id}', 'JobpostController@deletelang');
 Route::post('/candidate/jobpost', 'JobpostController@store');
 
 //Hobby
-Route::get('/candidate/hobby', 'HobbyController@show');
+//Route::get('/candidate/hobby', 'HobbyController@show');
 Route::get('/candidate/hobbyview', function(){
 	//$candidate_details = Reguser::All();
 	//$candidate_details = Reguser::All();	
@@ -153,6 +168,10 @@ Route::get('/candidate/hobby/{id}', 'HobbyController@edit');
 Route::put('/candidate/hobby/{id}', 'HobbyController@editlang');
 Route::delete('/candidate/del/hobby/{id}', 'HobbyController@deletelang');
 Route::post('/candidate/hobby', 'HobbyController@store');
+Route::get('/candidate/hobby/trashed/{id}','HobbyController@showTrashed');
+Route::get('/candidate/hobby/restoretrashed/{id}','HobbyController@restoreTrashed');
+
+
 
 //Image upload
 //Route::get('/candidate/imageupload', 'ImageController@show');

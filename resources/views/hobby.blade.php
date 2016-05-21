@@ -6,7 +6,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Add Profile</div>
                 <div class="panel-body"> 
-
                     @if($errors->any())
                         @foreach($errors->all() as $error)
                         <div class="alert alert-danger">{{$error}}</div>

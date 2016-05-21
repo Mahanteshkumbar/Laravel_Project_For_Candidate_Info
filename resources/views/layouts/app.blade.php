@@ -60,6 +60,8 @@
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/admin/login') }}">Admin Login</a></li>
+                        <li><a href="{{ url('admin/register') }}">Admin Register</a></li>
                         <li><a href="{{ url('/register/candidate') }}">Candidate Register</a></li>
                         <li><a href="{{url('/candidate/searchjobview')}}">Search Job</a></li>
                     @else
