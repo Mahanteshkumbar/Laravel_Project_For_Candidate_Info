@@ -37,15 +37,22 @@ class SkillController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'Skills' => 'required|max:255',
-    //         'efficiency' => 'required',
-    // 			'yeo' => 'required',
-           
-    //     ]);
-    // }
+    
+    protected function showTrashed($id)
+    {
+        $skills_trashed_info = Skills::onlyTrashed()
+                ->where('users_id', $id)
+                ->get();
+       return view('trashedskill',compact('skills_trashed_info'));
+    }
+
+    protected function restoreTrashed($id)
+    {
+        $hobby_trashed_info = Skills::onlyTrashed()
+                ->where('id', $id)
+                ->restore();
+       return view('home');
+    }
 
 //'Skills','efficiency','yoe',
     public function store(SkillCreateRequest $request){        

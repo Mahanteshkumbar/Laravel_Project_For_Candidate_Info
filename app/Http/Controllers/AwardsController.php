@@ -37,16 +37,22 @@ class AwardsController extends Controller
         $regUserInfo = Awards::findorFail($id);
         return view('showusers',compact('regUserInfo')); 
     }
+    
+    protected function showTrashed($id)
+    {
+        $award_trashed_info = Awards::onlyTrashed()
+                ->where('users_id', $id)
+                ->get();
+       return view('trashedaward',compact('award_trashed_info'));
+    }
 
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'name_of_university' => 'required|max:255',
-    //         'course' => 'required',
-                //'aggregate' => 'required',
-           
-    //     ]);
-    // }
+    protected function restoreTrashed($id)
+    {
+        $experience_trashed_info = Awards::onlyTrashed()
+                ->where('id', $id)
+                ->restore();
+       return view('home');
+    }
 
     public function store(AwardCreateRequest $request){        
         //return Auth::user()->id;

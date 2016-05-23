@@ -105,6 +105,8 @@ Route::get('/candidate/education/{id}', 'EducationController@edit');
 Route::put('/candidate/education/{id}', 'EducationController@editlang');
 Route::delete('/candidate/del/education/{id}', 'EducationController@deletelang');
 Route::post('/candidate/education', 'EducationController@store');
+Route::get('/candidate/education/trashed/{id}','EducationController@showTrashed');
+Route::get('/candidate/education/restoretrashed/{id}','EducationController@restoreTrashed');
 
 
 //langauges
@@ -117,6 +119,8 @@ Route::get('/candidate/languages/{id}', 'LangaugeController@edit');
 Route::put('/candidate/languages/{id}', 'LangaugeController@editlang');
 Route::delete('/candidate/del/languages/{id}', 'LangaugeController@deletelang');
 Route::post('/candidate/languages', 'LangaugeController@store');
+Route::get('/candidate/languages/trashed/{id}','LangaugeController@showTrashed');
+Route::get('/candidate/languages/restoretrashed/{id}','LangaugeController@restoreTrashed');
 
 
 
@@ -133,6 +137,8 @@ Route::get('/candidate/experience/{id}', 'ExperienceController@edit');
 Route::put('/candidate/experience/{id}', 'ExperienceController@editlang');
 Route::delete('/candidate/del/experience/{id?}', 'ExperienceController@deletelang');
 Route::post('/candidate/experience', 'ExperienceController@store');
+Route::get('/candidate/experience/trashed/{id}','ExperienceController@showTrashed');
+Route::get('/candidate/experience/restoretrashed/{id}','ExperienceController@restoreTrashed');
 
 
 //Skills
@@ -145,6 +151,8 @@ Route::get('/candidate/skill/{id}', 'SkillController@edit');
 Route::put('/candidate/skill/{id}', 'SkillController@editlang');
 Route::delete('/candidate/del/skill/{id}', 'SkillController@deletelang');
 Route::post('/candidate/skill', 'SkillController@store');
+Route::get('/candidate/skill/trashed/{id}','SkillController@showTrashed');
+Route::get('/candidate/skill/restoretrashed/{id}','SkillController@restoreTrashed');
 
 //Jobpost
 Route::get('/candidate/jobpost', 'JobpostController@show');
@@ -156,6 +164,9 @@ Route::get('/candidate/jobpost/{id}', 'JobpostController@edit');
 Route::put('/candidate/jobpost/{id}', 'JobpostController@editlang');
 Route::delete('/candidate/del/jobpost/{id}', 'JobpostController@deletelang');
 Route::post('/candidate/jobpost', 'JobpostController@store');
+Route::get('/candidate/jobpost/trashed/{id}','JobpostController@showTrashed');
+Route::get('/candidate/jobpost/restoretrashed/{id}','JobpostController@restoreTrashed');
+
 
 //Hobby
 //Route::get('/candidate/hobby', 'HobbyController@show');
@@ -205,6 +216,9 @@ Route::get('/candidate/award/{id}', 'AwardsController@edit');
 Route::put('/candidate/award/{id}', 'AwardsController@editlang');
 Route::delete('/candidate/del/award/{id}', 'AwardsController@deletelang');
 Route::post('/candidate/award', 'AwardsController@store');
+Route::get('/candidate/award/trashed/{id}','AwardsController@showTrashed');
+Route::get('/candidate/award/restoretrashed/{id}','AwardsController@restoreTrashed');
+
 
 });//close middleware auth
 

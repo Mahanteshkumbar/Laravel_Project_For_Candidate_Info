@@ -36,17 +36,21 @@ class ExperienceController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'Company_name' => 'required|max:255',
-    //         'Start_year' => 'required',
-    //         'End_year' => 'required',
-    //         'Designation' => 'required',
-    //         'Exp_summary' => 'required',
-           
-    //     ]);
-    // }
+    protected function showTrashed($id)
+    {
+        $experience_trashed_info = Experience::onlyTrashed()
+                ->where('users_id', $id)
+                ->get();
+       return view('trashedexperience',compact('experience_trashed_info'));
+    }
+
+    protected function restoreTrashed($id)
+    {
+        $experience_trashed_info = Experience::onlyTrashed()
+                ->where('id', $id)
+                ->restore();
+       return view('home');
+    }
 
     public function store(WorkexpCreateRequest $request){        
         //return Auth::user()->id;
@@ -76,7 +80,7 @@ class ExperienceController extends Controller
      public function deletelang($id){
         $task = Experience::findOrFail($id);
         $task->delete();
-        //return view('workexperience');
+        return view('home');
 
      }
 }

@@ -36,16 +36,21 @@ class EducationController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'name_of_university' => 'required|max:255',
-    //         'course' => 'required',
-                //'aggregate' => 'required',
-           
-    //     ]);
-    // }
+    protected function showTrashed($id)
+    {
+        $education_trashed_info = Education::onlyTrashed()
+                ->where('users_id', $id)
+                ->get();
+       return view('trashededucation',compact('education_trashed_info'));
+    }
 
+    protected function restoreTrashed($id)
+    {
+        $education_trashed_info = Education::onlyTrashed()
+                ->where('id', $id)
+                ->restore();
+       return view('home');
+    }
     public function store(EducationCreateRequest $request){        
         //return Auth::user()->id;
         $values = $request->All();

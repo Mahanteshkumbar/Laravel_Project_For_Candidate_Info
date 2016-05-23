@@ -36,14 +36,21 @@ class LangaugeController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'Language' => 'required|max:255',
-    //         'Level_of_fluency' => 'required',
-           
-    //     ]);
-    // }
+    protected function showTrashed($id)
+    {
+        $language_trashed_info = Language::onlyTrashed()
+                ->where('users_id', $id)
+                ->get();
+       return view('trashedlanguage',compact('language_trashed_info'));
+    }
+
+    protected function restoreTrashed($id)
+    {
+        $language_trashed_info = Language::onlyTrashed()
+                ->where('id', $id)
+                ->restore();
+       return view('home');
+    }
 
     public function store(Request $request){        
         //return Auth::user()->id;

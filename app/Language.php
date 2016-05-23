@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Language extends Model
 {
     //
-
+    use SoftDeletes;
     //
     /**
      * The attributes that are mass assignable.
@@ -20,15 +20,7 @@ class Language extends Model
         'users_id'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'remember_token',
-    ];
-
+    protected $dates = ['deleted_at'];
     // public function Users(){
     //  return $this->belongsTo('App\Users','users_id');
     // }

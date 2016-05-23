@@ -73,7 +73,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>Work Experience details
-                        <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/experienceview') }}">Add New</a></h1>
+                        <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/experienceview') }}">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/experience/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
                         <div class="table-responsive">
                         <table class="table table-bordered">
                           <thead>
@@ -116,7 +116,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>Education Details
-                        <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/educationview') }}">Add New</a></h1>
+                        <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/educationview') }}">Add New</a>  <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/education/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
                    <div class="table-responsive">
                          <table class="table table-bordered">
                           <thead>
@@ -134,7 +134,7 @@
                               <td>{{$edu->course}}</td>
                               <td>{{$edu->aggregate}}</td>
                               <td>
-                                 <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/experience/'.$edu->id) }}"><i class="fa fa-pencil"></i></a>
+                                 <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/education/'.$edu->id) }}"><i class="fa fa-pencil"></i></a>
 
                                     <p style="display:inline-block;padding:right:10px;">{!! Form::open([
                                         'method' => 'DELETE',
@@ -154,7 +154,7 @@
             </div>
              <div class="row">
                 <div class="col-md-12">
-                    <h1>Languages <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/languagesview') }}">Add New</a></h1>                       
+                    <h1>Languages <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/languagesview') }}">Add New</a>  <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/languages/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>                       
 
                         <div class="table-responsive">
                          <table class="table table-bordered table-responsive">
@@ -191,7 +191,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Skills <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/skillview') }}">Add New</a></h1>
+                    <h1>Skills <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/skillview') }}">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/skill/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
                    <div class="table-responsive">
                      <table class="table table-bordered table-responsive">
                       <thead>
@@ -231,7 +231,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Job Post <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/jobpostview') }}">Add New</a></h1>
+                    <h1>Job Post <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/jobpostview') }}">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/jobpost/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
                         <div class="table-responsive">
                          <table class="table table-bordered">
                           <thead>
@@ -327,7 +327,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Awards <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/awardview') }}">Add New</a></h1>
+                    <h1>Awards <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/awardview') }}">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/award/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
 
                     <div class="table-responsive">
                      <table class="table table-bordered">

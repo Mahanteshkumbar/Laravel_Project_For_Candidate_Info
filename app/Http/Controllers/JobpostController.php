@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Jobpost;
-
 use Auth;
 
 class JobpostController extends Controller
@@ -36,9 +35,25 @@ class JobpostController extends Controller
     public function show($id){
         $regUserInfo = Jobpost::findorFail($id);
         return view('showusers',compact('regUserInfo')); 
-    }       
+    }  
 
-	//'Jobpost','efficiency','yoe',
+    protected function showTrashed($id)
+    {
+        $jobpost_trashed_info = Jobpost::onlyTrashed()
+                ->where('users_id', $id)
+                ->get();
+       return view('trashedjobpost',compact('jobpost_trashed_info'));
+    }
+
+    protected function restoreTrashed($id)
+    {
+        $hobby_trashed_info = Jobpost::onlyTrashed()
+                ->where('id', $id)
+                ->restore();
+       return view('home');
+    }
+
+     
     public function store(Request $request){        
         //return Auth::user()->id;
         $values = $request->All();

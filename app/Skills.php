@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Skills extends Model
 {
@@ -11,6 +12,8 @@ class Skills extends Model
      *
      * @var array
      */
+    use SoftDeletes;
+    
     protected $fillable = [
          'skill','efficiency','yoe','users_id'
     ];	

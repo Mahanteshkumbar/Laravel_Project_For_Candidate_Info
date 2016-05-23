@@ -8,6 +8,8 @@ use App\Admin;
 use App\Http\Requests;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\User;
+use App\Profile;
 
 class AdminController extends Controller
 {
@@ -21,11 +23,11 @@ class AdminController extends Controller
 
     public function postLogin(AdminCreateRequest $request){
 
-
-
         $credentials = ['email'=>$request->get('email'),'password'=>$request->get('password')];
 
         if(auth()->guard('admin')->attempt($credentials)){
+           // $user_info =  User::All();
+            //$profile_info = Profile::All();
             return redirect('/admin');
         }else{
             return redirect('/admin/login')
@@ -117,11 +119,10 @@ class AdminController extends Controller
         ]);
 
         //$profile->user()->sync([$user->id]);
-        return view('admins.index');
+        return redirect('/admin');
     }
 
-    public function logout(){
-          
+    public function logout(){          
         auth()->guard('admin')->logout();
         return redirect('/admin/login');
     }

@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Jobpost extends Model
 {
     //
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'Job_cmpny_name',
         'location',
@@ -25,6 +29,7 @@ class Jobpost extends Model
         'Job_qualification',
         'users_id'
     ];
+
 
     // public function Users(){
     // 	return $this->belongsTo('App\Users','users_id');
