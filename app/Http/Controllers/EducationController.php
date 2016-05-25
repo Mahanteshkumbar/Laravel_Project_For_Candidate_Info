@@ -49,7 +49,7 @@ class EducationController extends Controller
         $education_trashed_info = Education::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
-       return view('home');
+       return redirect('/');
     }
     public function store(EducationCreateRequest $request){        
         //return Auth::user()->id;
@@ -60,7 +60,7 @@ class EducationController extends Controller
         'course' => $request->get('course'),
         'aggregate' => $request->get('aggregate'),
         'users_id' => Auth::user()->id]);
-        return view('home');
+        return redirect('/');
 
         //$inputs->save();
     }
@@ -70,13 +70,13 @@ class EducationController extends Controller
         $task = Education::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
-        return view('home');
+        return redirect('/');
      }
 
      public function deletelang($id){
         $task = Education::findOrFail($id);
         $task->delete();
-        return view('home');
+        return redirect('/');
 
      }
 }

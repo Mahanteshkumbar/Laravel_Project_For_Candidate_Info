@@ -51,7 +51,8 @@ class HobbyController extends Controller
         $hobby_trashed_info = Hobby::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
-       return view('home');
+                return redirect('/');
+       //return view('home');
     }
 
 
@@ -63,7 +64,7 @@ class HobbyController extends Controller
         Hobby::create([
         'hname' => $request->get('hname'),
         'users_id' => Auth::user()->id]);
-        return view('home');
+        return redirect('/');
 
         //$inputs->save();
     }
@@ -73,13 +74,15 @@ class HobbyController extends Controller
         $task = Hobby::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
-        return view('home');
+        return redirect('/');
+        //return view('home');
      }
 
      public function deletelang($id){
         $task = Hobby::findOrFail($id);
         $task->delete();
-        return view('home');
+        return redirect('/');
+        //return view('home');
 
      }
 }

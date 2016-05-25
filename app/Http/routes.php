@@ -90,6 +90,7 @@ Route::get('/candidate/profile', function(){
 
 //profile
 Route::get('/candidate/profile/{id}', 'HomeController@accessEdit');
+Route::put('/candidate/profile/{id}', 'HomeController@editlang');
 ////Route::post('/candidate/profile/{id}', 'HomeController@edit');
 //Route::put('/candidate/profile/{id}', 'HomeController@edit');
 //Route::delete('/candidate/profile/{id}', 'HomeController@edit');
@@ -171,9 +172,8 @@ Route::get('/candidate/jobpost/restoretrashed/{id}','JobpostController@restoreTr
 //Hobby
 //Route::get('/candidate/hobby', 'HobbyController@show');
 Route::get('/candidate/hobbyview', function(){
-	//$candidate_details = Reguser::All();
-	//$candidate_details = Reguser::All();	
-	return view('hobby');
+	$hobby_info = Hobby::where('users_id', '=', Auth::user()->id)->get();	
+	return view('hobby',compact('hobby_info'));	
 });
 Route::get('/candidate/hobby/{id}', 'HobbyController@edit');
 Route::put('/candidate/hobby/{id}', 'HobbyController@editlang');
@@ -181,7 +181,16 @@ Route::delete('/candidate/del/hobby/{id}', 'HobbyController@deletelang');
 Route::post('/candidate/hobby', 'HobbyController@store');
 Route::get('/candidate/hobby/trashed/{id}','HobbyController@showTrashed');
 Route::get('/candidate/hobby/restoretrashed/{id}','HobbyController@restoreTrashed');
-
+Route::get('/candidate/getRequest',function(){
+	if(Request::Ajax()){
+		return "Ajax request on the floor";
+	}
+});
+Route::post('/candidate/register',function(){
+	if(Request::Ajax()){
+		return Response::json(Request::all());
+	}
+});
 
 
 //Image upload

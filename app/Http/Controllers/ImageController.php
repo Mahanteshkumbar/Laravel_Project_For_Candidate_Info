@@ -47,7 +47,7 @@ class ImageController extends Controller
         'imagepath' => $getpath,
         'users_id' => Auth::user()->id
         ]);
-        return view('home');  
+        return redirect('/');  
     }
 
 
@@ -57,13 +57,13 @@ class ImageController extends Controller
         $getpath = $request->file('image')->move('images/',$imageName);               
         $input = $request->all();
         $task->fill($input)->save();
-        return view('home');
+        return redirect('/');
      }
 
      public function deletelang($id){
         $task = Images::findOrFail($id);
         $task->delete();
-        return view('home');
+        return redirect('/');
 
      }
 }

@@ -51,7 +51,7 @@ class AwardsController extends Controller
         $experience_trashed_info = Awards::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
-       return view('home');
+       return redirect('/');
     }
 
     public function store(AwardCreateRequest $request){        
@@ -63,7 +63,7 @@ class AwardsController extends Controller
         'org' => $request->get('org'),
         'year' => $request->get('year'),
         'users_id' => Auth::user()->id]);
-        return view('home');
+        return redirect('/');
 
         //$inputs->save();
     }
@@ -73,13 +73,13 @@ class AwardsController extends Controller
         $task = Awards::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
-        return view('home');
+        return redirect('/');
      }
 
      public function deletelang($id){
         $task = Awards::findOrFail($id);
         $task->delete();
-        return view('home');
+        return redirect('/');
 
      }
 

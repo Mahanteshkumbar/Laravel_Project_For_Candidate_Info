@@ -51,7 +51,7 @@ class SkillController extends Controller
         $hobby_trashed_info = Skills::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
-       return view('home');
+       return redirect('/');
     }
 
 //'Skills','efficiency','yoe',
@@ -64,7 +64,7 @@ class SkillController extends Controller
         'efficiency' => $request->get('efficiency'),
         'yoe' => $request->get('yoe'),
         'users_id' => Auth::user()->id]);
-        return view('home');
+        return redirect('/');
 
         //$inputs->save();
     }
@@ -74,13 +74,13 @@ class SkillController extends Controller
         $task = Skills::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
-        return view('home');
+        return redirect('/');
      }
 
      public function deletelang($id){
         $task = Skills::findOrFail($id);
         $task->delete();
-        return view('home');
+        return redirect('/');
 
      }
 }

@@ -49,7 +49,7 @@ class ExperienceController extends Controller
         $experience_trashed_info = Experience::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
-       return view('home');
+       return redirect('/');
     }
 
     public function store(WorkexpCreateRequest $request){        
@@ -64,7 +64,7 @@ class ExperienceController extends Controller
         'Exp_summary' => $request->get('Exp_summary'),      
         'users_id' => Auth::user()->id]);
         
-        return view('home');
+        return redirect('/');
 
         //$inputs->save();
     }
@@ -74,13 +74,13 @@ class ExperienceController extends Controller
         $task = Experience::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
-        return view('home');
+        return redirect('/');
      }
 
      public function deletelang($id){
         $task = Experience::findOrFail($id);
         $task->delete();
-        return view('home');
+        return redirect('/');
 
      }
 }

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Profile;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -27,65 +28,21 @@ class HomeController extends Controller
 
 
     public function accessEdit(Request $request, $id){
-        $candidate_details = Profile::findorFail($id);
-        return view('profileform',compact('candidate_details'));
-
-        // $user =  User::create([            
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],            
-        //     'password' => bcrypt($data['password']),
-        // ]);
-
-        // $profile =  Profile::create([
-        //    'name' => $data['name'],
-        //    'lname' => $data['lname'],
-        //    'uname' => $data['uname'],
-        //    'mnum' => $data['mnum'],
-        //    'dob' => $data['dob'],
-        //    'status' => $data['status'],
-        //    'country' => $data['country'],
-        //     'email' => $data['email'],
-        //     'state' => $data['state'],
-        //     'city' => $data['city'],            
-        //    'addrno' => $data['addrno'],           
-        //     'users_id' => $user->id
-        // ]);
-
-        // //$profile->user()->sync([$user->id]);
-        // return $id;
-
-
+        $task = Profile::findorFail($id);
+        return view('profileform',compact('task'));
     }
 
-    public function edit(Request $request, $id){
-        
+    public function editlang($id, Request $request){
+        $task1 = User::findOrFail($id);  
+        $task2 = Profile::findorFail($id);     
+        $input = $request->all();
+        $task1->fill($input)->save();
+        $task2->fill($input)->save();
+        return view('home');
+     }
+
+    public function edit(Request $request, $id){        
         return $id;
-
-        // $user =  User::create([            
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],            
-        //     'password' => bcrypt($data['password']),
-        // ]);
-
-        // $profile =  Profile::create([
-        //    'name' => $data['name'],
-        //    'lname' => $data['lname'],
-        //    'uname' => $data['uname'],
-        //    'mnum' => $data['mnum'],
-        //    'dob' => $data['dob'],
-        //    'status' => $data['status'],
-        //    'country' => $data['country'],
-        //     'email' => $data['email'],
-        //     'state' => $data['state'],
-        //     'city' => $data['city'],            
-        //    'addrno' => $data['addrno'],           
-        //     'users_id' => $user->id
-        // ]);
-
-        // //$profile->user()->sync([$user->id]);
-        // return $id;
-
-
     }
     
 }

@@ -49,7 +49,7 @@ class LangaugeController extends Controller
         $language_trashed_info = Language::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
-       return view('home');
+       return redirect('/');
     }
 
     public function store(Request $request){        
@@ -60,7 +60,7 @@ class LangaugeController extends Controller
         'Language' => $request->get('Language'),
         'Level_of_fluency' => $request->get('Level_of_fluency'),
         'users_id' => Auth::user()->id]);
-        return view('home');
+        return redirect('/');
 
         //$inputs->save();
     }
@@ -70,13 +70,13 @@ class LangaugeController extends Controller
         $task = Language::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
-        return view('home');
+        return redirect('/');
      }
 
      public function deletelang($id){
         $task = Language::findOrFail($id);
         $task->delete();
-        return view('home');
+        return redirect('/');
 
      }
       

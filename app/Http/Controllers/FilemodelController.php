@@ -49,7 +49,7 @@ class FilemodelController extends Controller
         'filepath' => $getpath,
         'users_id' => Auth::user()->id
         ]);
-        return view('home');  
+        return redirect('/');  
     }
 
 
@@ -59,13 +59,13 @@ class FilemodelController extends Controller
         $getpath = $request->file('file')->move('files/',$imageName);               
         $input = $request->all();
         $task->fill($input)->save();
-        return view('home');
+        return redirect('/');
      }
 
      public function deletelang($id){
         $task = Filemodel::findOrFail($id);
         $task->delete();
-        return view('home');
+        return redirect('/');
 
      }
 
