@@ -49,6 +49,7 @@ class ExperienceController extends Controller
         $experience_trashed_info = Experience::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
+                flash()->info('Experience Restored!');
        return redirect('/');
     }
 
@@ -63,7 +64,7 @@ class ExperienceController extends Controller
         'Designation' => $request->get('Designation'),
         'Exp_summary' => $request->get('Exp_summary'),      
         'users_id' => Auth::user()->id]);
-        
+        flash()->success('New Experience Added!');
         return redirect('/');
 
         //$inputs->save();
@@ -74,12 +75,14 @@ class ExperienceController extends Controller
         $task = Experience::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
+        flash()->info('Experience Updated!');
         return redirect('/');
      }
 
      public function deletelang($id){
         $task = Experience::findOrFail($id);
         $task->delete();
+        flash()->warning('Experience Deleted!');
         return redirect('/');
 
      }

@@ -51,6 +51,7 @@ class AwardsController extends Controller
         $experience_trashed_info = Awards::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
+                flash()->info('Award Restored!');
        return redirect('/');
     }
 
@@ -63,6 +64,7 @@ class AwardsController extends Controller
         'org' => $request->get('org'),
         'year' => $request->get('year'),
         'users_id' => Auth::user()->id]);
+        flash()->success('New Award Added!');
         return redirect('/');
 
         //$inputs->save();
@@ -73,12 +75,14 @@ class AwardsController extends Controller
         $task = Awards::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
+        flash()->info('Award Updated!');
         return redirect('/');
      }
 
      public function deletelang($id){
         $task = Awards::findOrFail($id);
         $task->delete();
+        flash()->warning('Award Deleted!');
         return redirect('/');
 
      }

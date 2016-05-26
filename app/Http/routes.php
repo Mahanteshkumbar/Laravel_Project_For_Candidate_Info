@@ -73,8 +73,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/logout', 'AdminController@logout');
 });
 
-//protecting route from direct access for web users
-Route::group(['middleware' => 'web'], function () {  
+//protecting route from direct access for auth users
+Route::group(['middleware' => 'auth'], function () {  
    
 
 Route::get('/home', 'HomeController@index');

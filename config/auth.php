@@ -112,6 +112,12 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+        'admin' => [
+            'provider' => 'admin',
+            'email' => 'admin.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
     ],
 
 ];

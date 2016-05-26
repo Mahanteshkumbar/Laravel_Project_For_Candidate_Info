@@ -6,10 +6,12 @@ use App\Http\Requests;
 use Auth;
 use App\Http\Requests\HobbyCreateRequest;
 use App\Hobby;
+use App\Http\Controllers\session;
 
 class HobbyController extends Controller
 {
     //
+    //use session;
 
     /**
      * Display a listing of the resource.
@@ -27,9 +29,9 @@ class HobbyController extends Controller
         // }
     }
 
-    public function edit($id = null) {
+    public function edit($id) {
         $task = Hobby::findOrFail($id);
-        return view('updateaward',compact('task'));
+        return view('updatehobby',compact('task'));
        //return 'Hiiiii';
     }
 
@@ -51,6 +53,7 @@ class HobbyController extends Controller
         $hobby_trashed_info = Hobby::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
+                flash()->success('Hobby Restored!');
                 return redirect('/');
        //return view('home');
     }
@@ -60,10 +63,13 @@ class HobbyController extends Controller
     public function store(HobbyCreateRequest $request){        
         //return Auth::user()->id;
         $values = $request->All();
-        $flash_message = 'Created successfully';
         Hobby::create([
         'hname' => $request->get('hname'),
         'users_id' => Auth::user()->id]);
+
+        //laracasts flash messages
+        flash()->success('New Hobby Added!');
+        //session()->flash('flash_message','New Hobyy Added');
         return redirect('/');
 
         //$inputs->save();
@@ -71,16 +77,19 @@ class HobbyController extends Controller
 
 
      public function editlang($id, HobbyCreateRequest $request){
-        $task = Hobby::findOrFail($id);        
-        $input = $request->all();
+        $task = Hobby::findOrFail($id);  
+       // return $hobby;      
+        $input = $request->All();
         $task->fill($input)->save();
-        return redirect('/');
+         flash()->info('Hobby Updated!');
+        return redirect('/');       
         //return view('home');
      }
 
-     public function deletelang($id){
-        $task = Hobby::findOrFail($id);
-        $task->delete();
+     public function deletelang(Hobby $hobby){
+        //$task = Hobby::findOrFail($id);
+        $hobby->delete();
+        flash()->warning('Hobby Deleted!');
         return redirect('/');
         //return view('home');
 

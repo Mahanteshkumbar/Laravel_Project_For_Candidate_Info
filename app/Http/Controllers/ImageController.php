@@ -47,6 +47,7 @@ class ImageController extends Controller
         'imagepath' => $getpath,
         'users_id' => Auth::user()->id
         ]);
+        flash()->success('Profile pic added successfuly');
         return redirect('/');  
     }
 
@@ -57,12 +58,14 @@ class ImageController extends Controller
         $getpath = $request->file('image')->move('images/',$imageName);               
         $input = $request->all();
         $task->fill($input)->save();
+        flash()->info('Profile pic updated successfuly');
         return redirect('/');
      }
 
      public function deletelang($id){
         $task = Images::findOrFail($id);
         $task->delete();
+        flash()->warning('Profile pic deleteed successfuly');
         return redirect('/');
 
      }

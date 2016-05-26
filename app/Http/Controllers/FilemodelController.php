@@ -49,6 +49,7 @@ class FilemodelController extends Controller
         'filepath' => $getpath,
         'users_id' => Auth::user()->id
         ]);
+        flash()->success('Resume uploaded successfully!');
         return redirect('/');  
     }
 
@@ -59,12 +60,14 @@ class FilemodelController extends Controller
         $getpath = $request->file('file')->move('files/',$imageName);               
         $input = $request->all();
         $task->fill($input)->save();
+        flash()->info('Resume updated successfully!');
         return redirect('/');
      }
 
      public function deletelang($id){
         $task = Filemodel::findOrFail($id);
         $task->delete();
+        flash()->warning('Resume Deleted!');
         return redirect('/');
 
      }

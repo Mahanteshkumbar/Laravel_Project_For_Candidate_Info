@@ -49,6 +49,7 @@ class EducationController extends Controller
         $education_trashed_info = Education::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
+                flash()->info('Education Restored!');
        return redirect('/');
     }
     public function store(EducationCreateRequest $request){        
@@ -60,6 +61,7 @@ class EducationController extends Controller
         'course' => $request->get('course'),
         'aggregate' => $request->get('aggregate'),
         'users_id' => Auth::user()->id]);
+        flash()->success('New Education Added!');
         return redirect('/');
 
         //$inputs->save();
@@ -70,12 +72,14 @@ class EducationController extends Controller
         $task = Education::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
+        flash()->info('Education Updated!');
         return redirect('/');
      }
 
      public function deletelang($id){
         $task = Education::findOrFail($id);
         $task->delete();
+        flash()->warning('Education Deleted!');
         return redirect('/');
 
      }

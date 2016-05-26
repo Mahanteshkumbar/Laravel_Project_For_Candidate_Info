@@ -50,6 +50,7 @@ class JobpostController extends Controller
         $hobby_trashed_info = Jobpost::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
+                flash()->success('Jobpost Restored');
        return redirect('/');
     }
 
@@ -75,6 +76,7 @@ class JobpostController extends Controller
 	        'Job_type' => $request->get('Job_type'),
 	        'Job_qualification' => $request->get('Job_qualification'),        
         	'users_id' => Auth::user()->id]);
+            flash()->success('New Jobpost Added');
         	return redirect('/');
     }
 
@@ -83,12 +85,14 @@ class JobpostController extends Controller
         $task = Jobpost::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
+        flash()->info('Jobpost Updated');
         return redirect('/');
      }
 
      public function deletelang($id){
         $task = Jobpost::findOrFail($id);
         $task->delete();
+        flash()->warning('Jobpost Deleted!');
         return redirect('/');
 
      }

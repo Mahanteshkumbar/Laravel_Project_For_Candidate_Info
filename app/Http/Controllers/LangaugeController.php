@@ -49,6 +49,7 @@ class LangaugeController extends Controller
         $language_trashed_info = Language::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
+                 flash()->success('Language Restored!');
        return redirect('/');
     }
 
@@ -60,6 +61,8 @@ class LangaugeController extends Controller
         'Language' => $request->get('Language'),
         'Level_of_fluency' => $request->get('Level_of_fluency'),
         'users_id' => Auth::user()->id]);
+
+         flash()->success('New Language Added!');
         return redirect('/');
 
         //$inputs->save();
@@ -70,12 +73,14 @@ class LangaugeController extends Controller
         $task = Language::findOrFail($id);        
         $input = $request->all();
         $task->fill($input)->save();
+         flash()->info('Language Updated!');
         return redirect('/');
      }
 
      public function deletelang($id){
         $task = Language::findOrFail($id);
         $task->delete();
+         flash()->warning('Language Deleted!');
         return redirect('/');
 
      }
