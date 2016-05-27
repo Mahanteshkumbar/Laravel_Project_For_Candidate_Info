@@ -27,7 +27,7 @@ class Candidate extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // public function Users(){
-    //  return $this->belongsTo('App\Users','users_id');
-    // }
+     public function user(){
+     return $this->belongsTo('App\User');
+    }
 }

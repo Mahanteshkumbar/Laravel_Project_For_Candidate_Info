@@ -17,4 +17,8 @@ class Hobby extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = ['hname','users_id'];
+
+    public function user(){
+     return $this->belongsTo('App\User');
+    }
 }

@@ -1,15 +1,5 @@
 <?php
-use App\User;
 use App\Profile;
-use App\Language;
-use App\Experience;
-use App\Education;
-use App\Skills;
-use App\Jobpost;
-use App\Images;
-use App\Hobby;
-use App\Filemodel;
-use App\Awards;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,31 +17,18 @@ Route::auth();
 	if(Auth::user()){
 		$candidate_details = Profile::findorFail(Auth::user()->id);
 
-		$languages_info = Language::where('users_id', '=', Auth::user()->id)->get();
-
-		$experience_info = Experience::where('users_id', '=', Auth::user()->id)->get();
-		
-		$education_info = Education::where('users_id', '=', Auth::user()->id)->get();
-
-		//Eloquent relationships one to many
-		// $edu = Education::all();
-		// // Blade template
-		// foreach($edu as $e){
-		// 	return $e->users;
-		// }
-
-		$skills_info = Skills::where('users_id', '=', Auth::user()->id)->get();
-
-		$Jobpost_info = Jobpost::where('users_id', '=', Auth::user()->id)->get();
-
-		$Image_path = Images::where('users_id', '=', Auth::user()->id)->get();
-
-		$File_path = Filemodel::where('users_id','=', Auth::user()->id)->get();
-
-		$hobby_info = Hobby::where('users_id','=', Auth::user()->id)->get();
-
-		$award_info = Awards::where('users_id','=', Auth::user()->id)->get();
-
+		/*
+		* One To Many relationships
+		*/
+		$languages_info =  Auth::user()->Language;
+		$education_info = Auth::user()->Education;
+		$experience_info = Auth::user()->Experience;//Experience::where('users_id', '=', Auth::user()->id)->get();
+		$skills_info = Auth::user()->Skills;//Skills::where('users_id', '=', Auth::user()->id)->get();
+		$Jobpost_info = Auth::user()->Jobpost;//Jobpost::where('users_id', '=', Auth::user()->id)->get();
+		$Image_path = Auth::user()->Images;//Images::where('users_id', '=', Auth::user()->id)->get();
+		$File_path = Auth::user()->Filemodel;//Filemodel::where('users_id','=', Auth::user()->id)->get();
+		$hobby_info = Auth::user()->Hobby;//Hobby::where('users_id','=', Auth::user()->id)->get();
+		$award_info = Auth::user()->Awards;//Awards::where('users_id','=', Auth::user()->id)->get();
     	return view('welcome',compact('candidate_details','languages_info','experience_info','education_info','skills_info','Jobpost_info','Image_path','File_path','hobby_info','award_info'));
 	}else{
 		return view('welcome');

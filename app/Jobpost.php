@@ -31,7 +31,7 @@ class Jobpost extends Model
     ];
 
 
-    // public function Users(){
-    // 	return $this->belongsTo('App\Users','users_id');
-    // }
+    public function user(){
+     return $this->belongsTo('App\User');
+    }
 }

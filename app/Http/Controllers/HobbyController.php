@@ -86,9 +86,9 @@ class HobbyController extends Controller
         //return view('home');
      }
 
-     public function deletelang(Hobby $hobby){
-        //$task = Hobby::findOrFail($id);
-        $hobby->delete();
+     public function deletelang($id){
+        $task = Hobby::findOrFail($id);
+        $task->delete();
         flash()->warning('Hobby Deleted!');
         return redirect('/');
         //return view('home');

@@ -21,7 +21,8 @@ class Language extends Model
     ];
 
     protected $dates = ['deleted_at'];
-    // public function Users(){
-    //  return $this->belongsTo('App\Users','users_id');
-    // }
+    
+    public function user(){
+     return $this->belongsTo('App\User');
+    }
 }

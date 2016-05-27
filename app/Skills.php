@@ -18,7 +18,7 @@ class Skills extends Model
          'skill','efficiency','yoe','users_id'
     ];	
 
-    // public function Users(){
-    // 	return $this->belongsTo('App\User','users_id');
-    // }
+    public function user(){
+     return $this->belongsTo('App\User');
+    }
 }
