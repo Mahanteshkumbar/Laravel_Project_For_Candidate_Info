@@ -94,4 +94,15 @@ class HobbyController extends Controller
         //return view('home');
 
      }
+
+       public function deletepermanently(){
+        //$hobby_delete_all = Auth::user()->Hobby; 
+        return "Hiii";
+        // $hobby_delete_all->forceDelete();      
+        // flash()->warning('All Hobbies are Deleted!');
+        // return redirect('/');
+        //return view('home');
+
+     }
+
 }

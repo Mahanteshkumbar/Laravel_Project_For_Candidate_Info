@@ -1,6 +1,7 @@
 <?php
 use App\Profile;
-
+use App\Hobby;
+use App\Experience;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -158,6 +159,7 @@ Route::delete('/candidate/del/hobby/{id}', 'HobbyController@deletelang');
 Route::post('/candidate/hobby', 'HobbyController@store');
 Route::get('/candidate/hobby/trashed/{id}','HobbyController@showTrashed');
 Route::get('/candidate/hobby/restoretrashed/{id}','HobbyController@restoreTrashed');
+Route::get('/candidate/deleteall/hobby','HobbyController@deletepermanently');
 Route::get('/candidate/getRequest',function(){
 	if(Request::Ajax()){
 		return "Ajax request on the floor";
