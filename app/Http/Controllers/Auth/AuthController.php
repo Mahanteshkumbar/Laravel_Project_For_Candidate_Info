@@ -88,15 +88,6 @@ class AuthController extends Controller
            'users_id' => $user->id
         ]);
 
-        //$profile->user()->sync([$user->id]);
         return $user;
-    }
-
-    // protected function createprofile(array $data)
-    // {
-    //     return Profile::create([            
-    //         'state' => $data['state'],
-    //         'city' => $data['city']
-    //     ]);
-    // }
+    }   
 }

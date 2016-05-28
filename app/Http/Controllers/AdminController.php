@@ -14,33 +14,6 @@ use App\Profile;
 class AdminController extends Controller
 {
 
-    //
-    
-    public function login(){
-
-    	return view('admins.login');
-    }
-
-    public function postLogin(AdminCreateRequest $request){
-
-        $credentials = ['email'=>$request->get('email'),'password'=>$request->get('password')];
-
-        if(auth()->guard('admin')->attempt($credentials)){
-           // $user_info =  User::All();
-            //$profile_info = Profile::All();
-            return redirect('/admin');
-        }else{
-            return redirect('/admin/login')
-                    ->withErrors(['errors' => 'Login invalid'])
-                    ->withInput();
-        }
-    	//return 'Post login process';
-
-    }
-    public function index(){
-    	return view('admins.index');
-    }
-
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
@@ -50,22 +23,33 @@ class AdminController extends Controller
      */
     protected $redirectTo = '/';
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+    //protected $guard = 'admin';
+
+    public function __construct(){
+        $this->middleware('admin');
+    }
+    
+    public function login(){
+    	return view('admins.login');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+    public function postLogin(AdminCreateRequest $request){
+
+        $credentials = ['email'=>$request->get('email'),'password'=>$request->get('password')];
+
+        if(auth()->guard('admin')->attempt($credentials)){
+           return redirect('/admin');
+        }else{
+            return redirect('/admin/login')
+                    ->withErrors(['errors' => 'Login invalid'])
+                    ->withInput();
+        }    	
+    }
+
+    public function index(){
+    	return view('admins.index');
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -96,15 +80,6 @@ class AdminController extends Controller
         ]);
     }
 
-    // protected function createprofile(array $data)
-    // {
-    //     return Profile::create([            
-    //         'state' => $data['state'],
-    //         'city' => $data['city']
-    //     ]);
-    // }
-
-
     public function showRegistrationForm(){          
         return view('admins.register');
     }
@@ -117,8 +92,6 @@ class AdminController extends Controller
            'state' => $request->get('state'),
            'city' => $request->get('city')          
         ]);
-
-        //$profile->user()->sync([$user->id]);
         return redirect('/admin');
     }
 
@@ -126,8 +99,4 @@ class AdminController extends Controller
         auth()->guard('admin')->logout();
         return redirect('/admin/login');
     }
-    
-            
-    
-
 }
