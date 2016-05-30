@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
              <div class="col-md-3">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Advanced Job Search</div>
                 <div class="panel-body">
                     {!! Form::open(['url'=>'candidate/advancejobsearch']) !!}
@@ -49,8 +49,8 @@
             </div>
     </div>
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">Add Profile</div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Search Job</div>
                 <div class="panel-body"> 
 
                     @if($errors->any())

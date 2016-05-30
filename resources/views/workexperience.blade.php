@@ -108,26 +108,25 @@
 
 <script type="text/javascript">
 
-function deleteExperience(id) {
+    function deleteExperience(id) {
 
-     var url = 'del/experience'
-        //var dataId = $('#btnDeleteProduct').attr('data-id');
-         confirm("Press a button!");
-        
-        $.ajax({
-            method: "DELETE",
-            url: url + '/' + id,
-            data: { "_token": "{{ csrf_token() }}" },
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
+         var url = 'del/experience'
+            //var dataId = $('#btnDeleteProduct').attr('data-id');
+             confirm("Press a button!");
+            
+            $.ajax({
+                method: "DELETE",
+                url: url + '/' + id,
+                data: { "_token": "{{ csrf_token() }}" },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+    }
 
-        });
-
-}
    $('.deleteProduct').on('click',function(){
         //var dataId = $(this).data('ids');
         var url = 'candidate/del/experience'

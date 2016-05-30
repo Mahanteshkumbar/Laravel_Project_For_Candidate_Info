@@ -31,7 +31,7 @@
 
         <div class="col-md-8" style="background-color:#ecf0f1;">           
             <h1 style="display:inline-block;">{{ Auth::user()->name }}</h1>
-            <!-- <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/profile/'. Auth::user()->id) }}"><i class="fa fa-pencil"></i></a> -->
+            <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/profile/'. Auth::user()->id) }}"><i class="fa fa-pencil"></i></a>
 
             <div class="row">
                 <div class="col-md-6">
@@ -292,7 +292,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Hobby <a  style="display:inline-block;padding:right:10px;" title="Click !" href="{{ url('/candidate/hobbyview') }}">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/hobby/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
+                    <h1>Hobby <a  style="display:inline-block;padding:right:10px;" title="Click !" href="{{ url('/candidate/hobbyview') }}" id="getRequest">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/hobby/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
 
                     <div class="table-responsive">
                      <table class="table table-bordered">

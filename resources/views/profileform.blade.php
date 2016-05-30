@@ -6,8 +6,101 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Update Profile</div>
                 <div class="panel-body">  
-                <p>{{$candidate_details}}</p>                  
-                     <form class="form-horizontal" role="form" method="PUT" action="{{ url('/candidate/profile/'.Auth::user()->id) }}">
+                <!-- <p>{{$task}}</p>    -->
+                    {!! Form::model($task, ['method' => 'put','url' => ['/candidate/profile', $task->id]]) !!}
+                            <div class="form-group">
+                                {!! Form::label('First Name') !!}
+                                {!! Form::text('name', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'name')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('Last Name') !!}
+                                {!! Form::text('lname', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'lname')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('User Name') !!}
+                                {!! Form::text('uname', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'uname')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('Mobile Number') !!}
+                                {!! Form::text('mnum', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'mnum')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('DOB') !!}
+                                {!! Form::date('dob', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'dob')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('Status') !!}
+                                {!! Form::select('status', ['Fresher'=>'Fresher','Working'=>'Working','Working-On-Notice-Period'=>'Working On Notice-Period','Not Working'], 'status', ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('Country') !!}
+                                {!! Form::text('country', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'Country')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('State') !!}
+                                {!! Form::text('state', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'State')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('City') !!}
+                                {!! Form::text('city', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'City')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('Aadhar Card Number') !!}
+                                {!! Form::text('addrno', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'Aadhar Card Number')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('E-Mail Address') !!}
+                                {!! Form::email('email', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'E-Mail Address')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('Passport Id') !!}
+                                {!! Form::text('passportid', null, 
+                                    array('class'=>'form-control', 
+                                          'placeholder'=>'Passport Id')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('Status') !!}
+                                {!! Form::select('alerts', ['dialy','weekly','weekly','2 weeks','monthly'], 'alerts', ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::submit('Update!', 
+                                  array('class'=>'btn btn-primary')) !!}
+                            </div>
+                    {!! Form::close() !!}               
+                     <!-- <form class="form-horizontal" role="form" method="PUT" action="{{ url('/candidate/profile/'.Auth::user()->id) }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group">
@@ -135,7 +228,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>
