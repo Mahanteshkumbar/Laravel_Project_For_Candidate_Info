@@ -19,6 +19,7 @@ class CreateAwardTable extends Migration
             $table->date('year');
             $table->integer('users_id')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

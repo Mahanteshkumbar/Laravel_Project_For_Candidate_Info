@@ -68,7 +68,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Hobby','users_id');
     }
 
-     public function Filemodel(){
+    public function Filemodel(){
         return $this->hasMany('App\Filemodel','users_id');
-    }       
+    } 
+    
+    public function Tag(){
+        return $this->belongsToMany('App\Tag');
+    }      
 }

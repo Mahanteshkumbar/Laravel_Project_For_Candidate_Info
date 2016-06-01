@@ -31,6 +31,7 @@ class CreateJobpostTable extends Migration
             $table->string('Job_qualification');
             $table->integer('users_id')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

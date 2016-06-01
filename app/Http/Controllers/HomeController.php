@@ -38,7 +38,7 @@ class HomeController extends Controller
         $input = $request->all();
         $task1->fill($input)->save();
         $task2->fill($input)->save();
-        return view('home');
+        return redirect('/');
      }
 
     public function edit(Request $request, $id){        

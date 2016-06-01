@@ -22,6 +22,7 @@ class CreateExperienceTable extends Migration
           $table->string('Exp_summary');
           $table->integer('users_id')->unsigned()->nullable();
           $table->foreign('users_id')->references('id')->on('users');
+          $table->softDeletes();
           $table->timestamps();
         });
     }

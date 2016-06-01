@@ -4,9 +4,9 @@
     <div class="row">     
         <hr>          
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="color:green;">Description of Job</div>
-                    <div class="panel-body text-center">                        
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center" style="color:white;">Description of Job</div>
+                    <div class="panel-body text-justify">                        
                         <p><b>Job_cmpny_name:</b>{{$jobLists->Job_cmpny_name}}</p>
                         <p><b>Location:</b>{{$jobLists->location}}</p>
                         <p><b>Job_title:</b>{{$jobLists->Job_title}}</p>

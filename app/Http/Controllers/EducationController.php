@@ -36,22 +36,21 @@ class EducationController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    protected function showTrashed($id)
-    {
+    protected function showTrashed($id) {
         $education_trashed_info = Education::onlyTrashed()
                 ->where('users_id', $id)
                 ->get();
        return view('trashededucation',compact('education_trashed_info'));
     }
 
-    protected function restoreTrashed($id)
-    {
+    protected function restoreTrashed($id) {
         $education_trashed_info = Education::onlyTrashed()
                 ->where('id', $id)
                 ->restore();
                 flash()->info('Education Restored!');
        return redirect('/');
     }
+    
     public function store(EducationCreateRequest $request){        
         //return Auth::user()->id;
         $values = $request->All();

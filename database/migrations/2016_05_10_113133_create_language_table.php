@@ -18,6 +18,7 @@ class CreateLanguageTable extends Migration
             $table->string('Level_of_fluency');
             $table->integer('users_id')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

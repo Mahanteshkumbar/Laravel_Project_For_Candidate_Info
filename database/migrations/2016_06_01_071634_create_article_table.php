@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBobbiesTable extends Migration
+class CreateArticleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,8 @@ class CreateBobbiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('hobbies', function (Blueprint $table) {
+        Schema::create('Articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('hname');
-            $table->integer('users_id')->unsigned()->nullable();
-            $table->foreign('users_id')->references('id')->on('users');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ class CreateBobbiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('hobbies');
+        Schema::drop('Articles');
     }
 }
