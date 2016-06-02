@@ -31,6 +31,7 @@ Route::auth();
 		$File_path = Auth::user()->Filemodel;//Filemodel::where('users_id','=', Auth::user()->id)->get();
 		$hobby_info = Auth::user()->Hobby;//Hobby::where('users_id','=', Auth::user()->id)->get();
 		$award_info = Auth::user()->Awards;//Awards::where('users_id','=', Auth::user()->id)->get();
+		
     	return view('welcome',compact('candidate_details','languages_info','experience_info','education_info','skills_info','Jobpost_info','Image_path','File_path','hobby_info','award_info'));
 	}else{
 		return view('welcome');
@@ -186,7 +187,8 @@ Route::group(['middleware' => 'auth'], function () {
 	//awards
 	Route::get('/candidate/award', 'AwardsController@show');
 	Route::get('/candidate/awardview', function(){
-		return view('award');
+		$tags = App\Tag::lists('Name','id');
+		return view('award',compact('tags'));
 	});
 	Route::get('/candidate/award/{id}', 'AwardsController@edit');
 	Route::put('/candidate/award/{id}', 'AwardsController@editlang');
@@ -194,6 +196,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/candidate/award', 'AwardsController@store');
 	Route::get('/candidate/award/trashed/{id}','AwardsController@showTrashed');
 	Route::get('/candidate/award/restoretrashed/{id}','AwardsController@restoreTrashed');
+
+	//Add new Tags 
+	Route::get('/candidate/tagview', function(){
+		return view('tag');
+	});
+	Route::post('/candidate/tag','TagController@store');
+
 });//close middleware auth
 
 

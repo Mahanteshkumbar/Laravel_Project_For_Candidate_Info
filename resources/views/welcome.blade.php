@@ -327,8 +327,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Awards <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/awardview') }}">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/award/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
-
+                    <h1>Awards <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/awardview') }}">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/award/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a>  <a href="{{url('/candidate/tagview')}}">Add New Tag</a></h1>
+                    <h3></h3>
                     <div class="table-responsive">
                      <table class="table table-bordered">
                           <thead>
@@ -336,6 +336,7 @@
                               <th>Award</th>
                               <th>Organisation</th>
                               <th>Year</th>
+                              <th>Tags</th>
                               <th></th>
                             </tr>
                           </thead>
@@ -345,13 +346,14 @@
                               <td>{{$awds->award}}</td>
                               <td>{{$awds->org}}</td>
                               <td>{{$awds->year}}</td>
+                              <td></td>
                               <td>
                                 <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/award/'.$awds->id) }}"><i class="fa fa-pencil"></i></a>
 
-                                <p style="display:inline-block;padding:right:10px;">{!! Form::open([
+                                <p style="display:inline-block;padding:right:10px;">
+                                  {!! Form::open([
                                     'method' => 'DELETE',
-                                    'url' => ['/candidate/del/award',$awds->id]
-                                ]) !!}
+                                    'url' => ['/candidate/del/award',$awds->id]]) !!}
                                     {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                 {!! Form::close() !!}
                                 </p>

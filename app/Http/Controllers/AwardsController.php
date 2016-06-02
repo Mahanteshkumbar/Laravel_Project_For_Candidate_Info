@@ -4,33 +4,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Awards;
+use App\Tag;
 use App\Http\Requests;
 use App\Http\Requests\AwardCreateRequest;
 
 class AwardsController extends Controller
 {
-    //
-
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
     public function index($id = null) {
-       // $regUserInfo = Awards::All();
-        //return view('getuser',compact('regUserInfo'));
-        //return $regUserInfo;
-        // if ($id == null) {
-        //     return RegisterController::orderBy('id', 'asc')->get();
-        // } else {
-        //     return $this->show($id);
-        // }
+       
     }
 
     public function edit($id = null) {
         $task = Awards::findOrFail($id);
-        return view('updateAward',compact('task'));
-       //return 'Hiiiii';
+        $tags = Tag::lists('Name','id');
+        $comparer = $task->tags->lists('id');
+        return view('updateAward',compact('task','tags','comparer'));
     }
 
     public function show($id){
@@ -55,26 +48,21 @@ class AwardsController extends Controller
        return redirect('/');
     }
 
-    public function store(AwardCreateRequest $request){        
-        //return Auth::user()->id;
-        $values = $request->All();
-        $flash_message = 'Created successfully';
-        Awards::create([
-        'award' => $request->get('award'),
-        'org' => $request->get('org'),
-        'year' => $request->get('year'),
-        'users_id' => Auth::user()->id]);
+    public function store(AwardCreateRequest $request){   
+        
+       // $client = Client::find(1);
+        // $exists = $client->products->contains($product_id); 
+
+        $awards = Auth::user()->Awards()->create($request->all());
+        $awards->tags()->sync($request->input('tags'),false);
         flash()->success('New Award Added!');
         return redirect('/');
-
-        //$inputs->save();
     }
 
-
      public function editlang($id, AwardCreateRequest $request){
-        $task = Awards::findOrFail($id);        
-        $input = $request->all();
-        $task->fill($input)->save();
+        $task = Awards::findOrFail($id);
+        $task->tags()->sync($request->input('tag_List'));       
+        $task->update($request->all());
         flash()->info('Award Updated!');
         return redirect('/');
      }

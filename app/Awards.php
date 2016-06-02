@@ -22,4 +22,8 @@ class Awards extends Model
     public function Tags(){
      	return $this->belongsToMany('App\Tag')->withTimestamps();
     }
+
+    public function getTagListAttribute(){
+        return $this->tags->lists('id')->toArray();
+    }
 }
