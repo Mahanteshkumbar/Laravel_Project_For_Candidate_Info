@@ -190,7 +190,8 @@ Route::group(['middleware' => 'auth'], function () {
 		$tags = App\Tag::lists('Name','id');
 		return view('award',compact('tags'));
 	});
-	Route::get('/candidate/award/{id}', 'AwardsController@edit');
+	//implicite binding
+	Route::get('/candidate/award/{award}', 'AwardsController@edit');
 	Route::put('/candidate/award/{id}', 'AwardsController@editlang');
 	Route::delete('/candidate/del/award/{id}', 'AwardsController@deletelang');
 	Route::post('/candidate/award', 'AwardsController@store');

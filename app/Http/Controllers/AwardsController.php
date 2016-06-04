@@ -19,11 +19,12 @@ class AwardsController extends Controller
        
     }
 
-    public function edit($id = null) {
-        $task = Awards::findOrFail($id);
+    //implicite binding /candidate/award/{award} name of the function parameter should be same($award).
+    public function edit(Awards $award) {
+       // $task = Awards::findOrFail($id);
+        $task = $award;
         $tags = Tag::lists('Name','id');
-        $comparer = $task->tags->lists('id');
-        return view('updateAward',compact('task','tags','comparer'));
+        return view('updateAward',compact('task','tags'));
     }
 
     public function show($id){
