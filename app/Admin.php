@@ -25,7 +25,7 @@ class Admin extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // public function Profile(){
-    //    return $this->hasMany('App\Profile','users_id');
-    // }
+    public function User(){
+       return $this->hasMany('App\Profile');
+    }
 }

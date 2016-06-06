@@ -15,20 +15,11 @@ class LangaugeController extends Controller
      * @return Response
      */
     public function index($id = null) {
-       // $regUserInfo = Language::All();
-        //return view('getuser',compact('regUserInfo'));
-        //return $regUserInfo;
-        // if ($id == null) {
-        //     return RegisterController::orderBy('id', 'asc')->get();
-        // } else {
-        //     return $this->show($id);
-        // }
+       
     }
 
-    public function edit($id = null) {
-        $task = Language::findOrFail($id);
-        return view('updatelang',compact('task'));
-       //return 'Hiiiii';
+    public function edit(Language $language) {
+        return view('updatelang',compact('language'));
     }
 
     public function show($id){
@@ -53,33 +44,21 @@ class LangaugeController extends Controller
        return redirect('/');
     }
 
-    public function store(Request $request){        
-        //return Auth::user()->id;
-        $values = $request->All();
-        $flash_message = 'Created successfully';
-        Language::create([
-        'Language' => $request->get('Language'),
-        'Level_of_fluency' => $request->get('Level_of_fluency'),
-        'users_id' => Auth::user()->id]);
-
+    public function store(Request $request){ 
+        Auth::user()->Language()->create($request->All());
          flash()->success('New Language Added!');
         return redirect('/');
-
-        //$inputs->save();
     }
 
 
-     public function editlang($id, Request $request){
-        $task = Language::findOrFail($id);        
-        $input = $request->all();
-        $task->fill($input)->save();
+     public function editlang(Language $language, Request $request){      
+        $language->update($request->All());
          flash()->info('Language Updated!');
         return redirect('/');
      }
 
-     public function deletelang($id){
-        $task = Language::findOrFail($id);
-        $task->delete();
+     public function deletelang(Language $language){
+        $language->delete();
          flash()->warning('Language Deleted!');
         return redirect('/');
 

@@ -16,20 +16,11 @@ class JobpostController extends Controller
      * @return Response
      */
     public function index($id = null) {
-       // $regUserInfo = Jobpost::All();
-        //return view('getuser',compact('regUserInfo'));
-        //return $regUserInfo;
-        // if ($id == null) {
-        //     return RegisterController::orderBy('id', 'asc')->get();
-        // } else {
-        //     return $this->show($id);
-        // }
+      
     }
 
-    public function edit($id = null) {
-        $task = Jobpost::findOrFail($id);
-        return view('updatejobpost',compact('task'));
-       //return 'Hiiiii';
+    public function edit(Jobpost $jobpost) {
+        return view('updatejobpost',compact('jobpost'));
     }
 
     public function show($id){
@@ -37,12 +28,10 @@ class JobpostController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }  
 
-    protected function showTrashed($id)
+    protected function showTrashed()
     {
-        $jobpost_trashed_info = Jobpost::onlyTrashed()
-                ->where('users_id', $id)
-                ->get();
-       return view('trashedjobpost',compact('jobpost_trashed_info'));
+        $jobpost_trashed_info = Auth::user()->Jobpost()->onlyTrashed()->get();
+        return view('trashedjobpost',compact('jobpost_trashed_info'));
     }
 
     protected function restoreTrashed($id)
@@ -55,45 +44,22 @@ class JobpostController extends Controller
     }
 
      
-    public function store(Request $request){        
-        //return Auth::user()->id;
-        $values = $request->All();
-        $flash_message = 'Created successfully';
-        Jobpost::create([
-            'Job_cmpny_name' => $request->get('Job_cmpny_name'),
-            'location' => $request->get('location'),
-        	'Job_title' => $request->get('Job_title'),
-	        'Job_description' => $request->get('Job_description'),		
-			'Job_post_date' => $request->get('Job_post_date'),
-			'Job_expiry_date' => $request->get('Job_expiry_date'),
-			'job_salary' => $request->get('job_salary'),
-	       	'Employment_type' => $request->get('Employment_type'),
-			'Contract_type' => $request->get('Contract_type'),
-			'Industry' => $request->get('Industry'),
-		    'Function' => $request->get('Function'),     	
-			'Job_experience1' => $request->get('Job_experience1'),
-			'Job_experience2' => $request->get('Job_experience2'),
-	        'Job_type' => $request->get('Job_type'),
-	        'Job_qualification' => $request->get('Job_qualification'),        
-        	'users_id' => Auth::user()->id]);
-            flash()->success('New Jobpost Added');
-        	return redirect('/');
+    public function store(Request $request){
+        Auth::user()->Jobpost()->create($request->All());
+        flash()->success('New Jobpost Added');
+        return redirect('/');
     }
 
 
-     public function editlang($id, Request $request){
-        $task = Jobpost::findOrFail($id);        
-        $input = $request->all();
-        $task->fill($input)->save();
+     public function editlang(Jobpost $jobpost, Request $request){
+        $jobpost->update($request->All());
         flash()->info('Jobpost Updated');
         return redirect('/');
      }
 
-     public function deletelang($id){
-        $task = Jobpost::findOrFail($id);
-        $task->delete();
+     public function deletelang(Jobpost $jobpost){
+        $jobpost->delete();
         flash()->warning('Jobpost Deleted!');
         return redirect('/');
-
-     }
+    }
 }

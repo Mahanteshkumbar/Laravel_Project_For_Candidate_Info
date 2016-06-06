@@ -21,10 +21,8 @@ class AwardsController extends Controller
 
     //implicite binding /candidate/award/{award} name of the function parameter should be same($award).
     public function edit(Awards $award) {
-       // $task = Awards::findOrFail($id);
-        $task = $award;
         $tags = Tag::lists('Name','id');
-        return view('updateAward',compact('task','tags'));
+        return view('updateAward',compact('award','tags'));
     }
 
     public function show($id){
@@ -60,20 +58,19 @@ class AwardsController extends Controller
         return redirect('/');
     }
 
-     public function editlang($id, AwardCreateRequest $request){
-        $task = Awards::findOrFail($id);
+     public function editlang(Awards $award, AwardCreateRequest $request){
+        $task = $award;
         $task->tags()->sync($request->input('tag_List'));       
         $task->update($request->all());
         flash()->info('Award Updated!');
         return redirect('/');
      }
 
-     public function deletelang($id){
-        $task = Awards::findOrFail($id);
-        $task->delete();
+     //implicite binding
+     public function deletelang(Awards $award){
+        $award->delete();
         flash()->warning('Award Deleted!');
         return redirect('/');
-
      }
 
 }

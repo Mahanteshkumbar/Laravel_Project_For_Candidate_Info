@@ -13,7 +13,7 @@
                         @endforeach
                     @endif
 
-                    {!! Form::model($task, ['method' => 'put','url' => ['/candidate/skill', $task->id]]) !!}
+                    {!! Form::model($skill, ['method' => 'put','url' => ['/candidate/skill', $skill->id]]) !!}
                         <div class="form-group">
                             {!! Form::label('Skill') !!}
                             {!! Form::text('skill', null, 

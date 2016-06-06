@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Update Jobpost </div>
                 <div class="panel-body"> 
                   <!--   @if($errors->any())
@@ -12,7 +12,7 @@
                         @endforeach
                     @endif -->   
 
-                    {!! Form::model($task, ['method' => 'put','url' => ['/candidate/jobpost', $task->id]]) !!}
+                    {!! Form::model($jobpost, ['method' => 'put','url' => ['/candidate/jobpost', $jobpost->id]]) !!}
                         <div class="form-group">
                             {!! Form::label('Job title') !!}
                             {!! Form::text('Job_title', null, 

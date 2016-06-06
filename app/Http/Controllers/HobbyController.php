@@ -19,19 +19,11 @@ class HobbyController extends Controller
      * @return Response
      */
     public function index($id = null) {
-       // $regUserInfo = Hobby::All();
-        //return view('getuser',compact('regUserInfo'));
-        //return $regUserInfo;
-        // if ($id == null) {
-        //     return RegisterController::orderBy('id', 'asc')->get();
-        // } else {
-        //     return $this->show($id);
-        // }
+       
     }
 
-    public function edit($id) {
-        $task = Hobby::findOrFail($id);
-        return view('updatehobby',compact('task'));
+    public function edit(Hobby $hobby) {
+        return view('updatehobby',compact('hobby'));
        //return 'Hiiiii';
     }
 
@@ -40,8 +32,7 @@ class HobbyController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    protected function showTrashed($id)
-    {
+    protected function showTrashed($id) {
         $hobby_trashed_info = Hobby::onlyTrashed()
                 ->where('users_id', $id)
                 ->get();
@@ -58,15 +49,9 @@ class HobbyController extends Controller
        //return view('home');
     }
 
-
-
     public function store(HobbyCreateRequest $request){        
         //return Auth::user()->id;
-        $values = $request->All();
-        Hobby::create([
-        'hname' => $request->get('hname'),
-        'users_id' => Auth::user()->id]);
-
+        Auth::user()->Hobby()->create($request->All());
         //laracasts flash messages
         flash()->success('New Hobby Added!');
         //session()->flash('flash_message','New Hobyy Added');
@@ -75,27 +60,19 @@ class HobbyController extends Controller
         //$inputs->save();
     }
 
-
-     public function editlang($id, HobbyCreateRequest $request){
-        $task = Hobby::findOrFail($id);  
-       // return $hobby;      
-        $input = $request->All();
-        $task->fill($input)->save();
-         flash()->info('Hobby Updated!');
+    public function editlang(Hobby $hobby, HobbyCreateRequest $request){
+        $hobby->update($request->All());
+        flash()->info('Hobby Updated!');
         return redirect('/');       
-        //return view('home');
-     }
+    }
 
-     public function deletelang($id){
-        $task = Hobby::findOrFail($id);
-        $task->delete();
+    public function deletelang(Hobby $hobby){
+        $hobby->delete();
         flash()->warning('Hobby Deleted!');
         return redirect('/');
-        //return view('home');
+    }
 
-     }
-
-       public function deletepermanently(){
+    public function deletepermanently(){
         //$hobby_delete_all = Auth::user()->Hobby; 
         return "Hiii";
         // $hobby_delete_all->forceDelete();      

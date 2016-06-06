@@ -11,7 +11,7 @@
                         <div class="alert alert-danger">{{$error}}</div>
                         @endforeach
                     @endif
-                    {!! Form::model($task, ['method' => 'put','url' => ['/candidate/education', $task->id]]) !!}
+                    {!! Form::model($education,['method' => 'put','url' => ['/candidate/education', $education->id]]) !!}
                         <div class="form-group">
                             {!! Form::label('name_of_university') !!}
                             {!! Form::text('name_of_university', null, 
@@ -25,13 +25,14 @@
                                 array('class'=>'form-control', 
                                       'placeholder'=>'course')) !!}
                         </div>
+
                         <div class="form-group">
-                            {!! Form::label('Aggregate) !!}
-                            {!! Form::text('aggregates', null, 
+                            {!! Form::label('Aggregate') !!}
+                            {!! Form::text('aggregate', null, 
                                 array('class'=>'form-control', 
-                                      'placeholder'=>'aggregates')) !!}
+                                      'placeholder'=>'course')) !!}
                         </div>
-                        
+
                         <div class="form-group">
                             {!! Form::submit('Update!', 
                               array('class'=>'btn btn-primary')) !!}

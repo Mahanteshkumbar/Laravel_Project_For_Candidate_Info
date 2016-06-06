@@ -403,7 +403,7 @@
   <div class="row">
     <div class="col-md-4">
       <h3><a href="{{url('/candidate/searchjobview')}}">Search Job</a></h3>
-      <h4><a href="{{url('/dashboard')}}">Please login to see out put DI(Dependency Ejection)(Middlware Applied)</a></h4>
+      <h4><a href="{{url('/dashboard')}}">Please login to see output DI(Dependency Ejection)(Middlware Applied)</a></h4>
     </div>
   </div>
 </div>

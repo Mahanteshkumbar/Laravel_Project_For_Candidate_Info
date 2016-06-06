@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AdminCreateRequest;
 use App\Admin;
 use App\Http\Requests;
+//use App\Http\Controllers\DB;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\User;
@@ -38,12 +39,15 @@ class AdminController extends Controller
         $credentials = ['email'=>$request->get('email'),'password'=>$request->get('password')];
 
         if(auth()->guard('admin')->attempt($credentials)){
-           return redirect('/admin');
+            $registeredUser = User::all();
+           return view('admins.index',compact('registeredUser'));
         }else{
             return redirect('/admin/login')
-                    ->withErrors(['errors' => 'Login invalid'])
-                    ->withInput();
-        }    	
+                ->withErrors(['errors' => 'Login invalid'])
+                ->withInput();
+        } 
+
+
     }
 
     public function index(){

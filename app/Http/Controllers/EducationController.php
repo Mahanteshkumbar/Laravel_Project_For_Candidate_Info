@@ -15,19 +15,12 @@ class EducationController extends Controller
      * @return Response
      */
     public function index($id = null) {
-       // $regUserInfo = Education::All();
-        //return view('getuser',compact('regUserInfo'));
-        //return $regUserInfo;
-        // if ($id == null) {
-        //     return RegisterController::orderBy('id', 'asc')->get();
-        // } else {
-        //     return $this->show($id);
-        // }
+       
     }
 
-    public function edit($id = null) {
-        $task = Education::findOrFail($id);
-        return view('updatelang',compact('task'));
+    public function edit(Education $education) {
+       // $task = $education;
+        return view('updateedu',compact('education'));
        //return 'Hiiiii';
     }
 
@@ -51,35 +44,22 @@ class EducationController extends Controller
        return redirect('/');
     }
     
-    public function store(EducationCreateRequest $request){        
-        //return Auth::user()->id;
-        $values = $request->All();
-        $flash_message = 'Created successfully';
-        Education::create([
-        'name_of_university' => $request->get('name_of_university'),
-        'course' => $request->get('course'),
-        'aggregate' => $request->get('aggregate'),
-        'users_id' => Auth::user()->id]);
+    public function store(EducationCreateRequest $request){                
+        Auth::user()->Education()->create($request->All());
         flash()->success('New Education Added!');
         return redirect('/');
-
-        //$inputs->save();
     }
 
 
-     public function editlang($id, EducationCreateRequest $request){
-        $task = Education::findOrFail($id);        
-        $input = $request->all();
-        $task->fill($input)->save();
+     public function editlang(Education $education, EducationCreateRequest $request){
+        $education->update($request->All());
         flash()->info('Education Updated!');
         return redirect('/');
      }
 
-     public function deletelang($id){
-        $task = Education::findOrFail($id);
-        $task->delete();
+    public function deletelang(Education $education){
+        $education->delete();
         flash()->warning('Education Deleted!');
         return redirect('/');
-
-     }
+    }
 }

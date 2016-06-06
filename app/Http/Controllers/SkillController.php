@@ -16,20 +16,11 @@ class SkillController extends Controller
      * @return Response
      */
     public function index($id = null) {
-       // $regUserInfo = Skills::All();
-        //return view('getuser',compact('regUserInfo'));
-        //return $regUserInfo;
-        // if ($id == null) {
-        //     return RegisterController::orderBy('id', 'asc')->get();
-        // } else {
-        //     return $this->show($id);
-        // }
+       
     }
 
-    public function edit($id = null) {
-        $task = Skills::findOrFail($id);
-        return view('updateskill',compact('task'));
-       //return 'Hiiiii';
+    public function edit(Skills $skill) {
+        return view('updateskill',compact('skill'));
     }
 
     public function show($id){
@@ -55,36 +46,21 @@ class SkillController extends Controller
        return redirect('/');
     }
 
-//'Skills','efficiency','yoe',
     public function store(SkillCreateRequest $request){        
-        //return Auth::user()->id;
-        $values = $request->All();
-        $flash_message = 'Created successfully';
-        Skills::create([
-        'skill' => $request->get('skill'),
-        'efficiency' => $request->get('efficiency'),
-        'yoe' => $request->get('yoe'),
-        'users_id' => Auth::user()->id]);
+        Auth::user()->Skills()->create($request->All());
          flash()->success('New Skill Addedd!');
         return redirect('/');
-
-        //$inputs->save();
     }
 
-
-     public function editlang($id, SkillCreateRequest $request){
-        $task = Skills::findOrFail($id);        
-        $input = $request->all();
-        $task->fill($input)->save();
+     public function editlang(Skills $skill, SkillCreateRequest $request){
+        $skill->update($request->All());
          flash()->info('Skill Updated!');
         return redirect('/');
      }
 
-     public function deletelang($id){
-        $task = Skills::findOrFail($id);
-        $task->delete();
-         flash()->warning('Skill Deleted!');
+     public function deletelang(Skills $skill){
+        $skill->delete();
+        flash()->warning('Skill Deleted!');
         return redirect('/');
-
      }
 }

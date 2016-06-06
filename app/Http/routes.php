@@ -77,9 +77,9 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 	Route::get('/candidate/education', 'EducationController@show');
 	//Route::get('/candidate/education', 'EducationController@show');
-	Route::get('/candidate/education/{id}', 'EducationController@edit');
-	Route::put('/candidate/education/{id}', 'EducationController@editlang');
-	Route::delete('/candidate/del/education/{id}', 'EducationController@deletelang');
+	Route::get('/candidate/education/{education}', 'EducationController@edit');
+	Route::put('/candidate/education/{education}', 'EducationController@editlang');
+	Route::delete('/candidate/del/education/{education}', 'EducationController@deletelang');
 	Route::post('/candidate/education', 'EducationController@store');
 	Route::get('/candidate/education/trashed/{id}','EducationController@showTrashed');
 	Route::get('/candidate/education/restoretrashed/{id}','EducationController@restoreTrashed');
@@ -90,9 +90,9 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('language');
 	});
 	Route::get('/candidate/languages', 'LangaugeController@show');
-	Route::get('/candidate/languages/{id}', 'LangaugeController@edit');
-	Route::put('/candidate/languages/{id}', 'LangaugeController@editlang');
-	Route::delete('/candidate/del/languages/{id}', 'LangaugeController@deletelang');
+	Route::get('/candidate/languages/{language}', 'LangaugeController@edit');
+	Route::put('/candidate/languages/{language}', 'LangaugeController@editlang');
+	Route::delete('/candidate/del/languages/{language}', 'LangaugeController@deletelang');
 	Route::post('/candidate/languages', 'LangaugeController@store');
 	Route::get('/candidate/languages/trashed/{id}','LangaugeController@showTrashed');
 	Route::get('/candidate/languages/restoretrashed/{id}','LangaugeController@restoreTrashed');
@@ -105,9 +105,9 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('workexperience',compact('experience_info'));
 	});
 	//Route::get('/candidate/experience', 'ExperienceController@show');
-	Route::get('/candidate/experience/{id}', 'ExperienceController@edit');
-	Route::put('/candidate/experience/{id}', 'ExperienceController@editlang');
-	Route::delete('/candidate/del/experience/{id?}', 'ExperienceController@deletelang');
+	Route::get('/candidate/experience/{experience}', 'ExperienceController@edit');
+	Route::put('/candidate/experience/{experience}', 'ExperienceController@editlang');
+	Route::delete('/candidate/del/experience/{experience?}', 'ExperienceController@deletelang');
 	Route::post('/candidate/experience', 'ExperienceController@store');
 	Route::get('/candidate/experience/trashed/{id}','ExperienceController@showTrashed');
 	Route::get('/candidate/experience/restoretrashed/{id}','ExperienceController@restoreTrashed');
@@ -118,9 +118,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/candidate/skillview', function(){
 		return view('skill');
 	});
-	Route::get('/candidate/skill/{id}', 'SkillController@edit');
-	Route::put('/candidate/skill/{id}', 'SkillController@editlang');
-	Route::delete('/candidate/del/skill/{id}', 'SkillController@deletelang');
+	Route::get('/candidate/skill/{skill}', 'SkillController@edit');
+	Route::put('/candidate/skill/{skill}', 'SkillController@editlang');
+	Route::delete('/candidate/del/skill/{skill}', 'SkillController@deletelang');
 	Route::post('/candidate/skill', 'SkillController@store');
 	Route::get('/candidate/skill/trashed/{id}','SkillController@showTrashed');
 	Route::get('/candidate/skill/restoretrashed/{id}','SkillController@restoreTrashed');
@@ -130,9 +130,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/candidate/jobpostview', function(){
 		return view('jobpost');
 	});
-	Route::get('/candidate/jobpost/{id}', 'JobpostController@edit');
-	Route::put('/candidate/jobpost/{id}', 'JobpostController@editlang');
-	Route::delete('/candidate/del/jobpost/{id}', 'JobpostController@deletelang');
+	Route::get('/candidate/jobpost/{jobpost}', 'JobpostController@edit');
+	Route::put('/candidate/jobpost/{jobpost}', 'JobpostController@editlang');
+	Route::delete('/candidate/del/jobpost/{jobpost}', 'JobpostController@deletelang');
 	Route::post('/candidate/jobpost', 'JobpostController@store');
 	Route::get('/candidate/jobpost/trashed/{id}','JobpostController@showTrashed');
 	Route::get('/candidate/jobpost/restoretrashed/{id}','JobpostController@restoreTrashed');
@@ -144,9 +144,9 @@ Route::group(['middleware' => 'auth'], function () {
 		$hobby_info = Hobby::where('users_id', '=', Auth::user()->id)->get();	
 		return view('hobby',compact('hobby_info'));	
 	});
-	Route::get('/candidate/hobby/{id}', 'HobbyController@edit');
-	Route::put('/candidate/hobby/{id}', 'HobbyController@editlang');
-	Route::delete('/candidate/del/hobby/{id}', 'HobbyController@deletelang');
+	Route::get('/candidate/hobby/{hobby}', 'HobbyController@edit');
+	Route::put('/candidate/hobby/{hobby}', 'HobbyController@editlang');
+	Route::delete('/candidate/del/hobby/{hobby}', 'HobbyController@deletelang');
 	Route::post('/candidate/hobby', 'HobbyController@store');
 	Route::get('/candidate/hobby/trashed/{id}','HobbyController@showTrashed');
 	Route::get('/candidate/hobby/restoretrashed/{id}','HobbyController@restoreTrashed');
@@ -192,8 +192,8 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 	//implicite binding
 	Route::get('/candidate/award/{award}', 'AwardsController@edit');
-	Route::put('/candidate/award/{id}', 'AwardsController@editlang');
-	Route::delete('/candidate/del/award/{id}', 'AwardsController@deletelang');
+	Route::put('/candidate/award/{award}', 'AwardsController@editlang');
+	Route::delete('/candidate/del/award/{award}', 'AwardsController@deletelang');
 	Route::post('/candidate/award', 'AwardsController@store');
 	Route::get('/candidate/award/trashed/{id}','AwardsController@showTrashed');
 	Route::get('/candidate/award/restoretrashed/{id}','AwardsController@restoreTrashed');

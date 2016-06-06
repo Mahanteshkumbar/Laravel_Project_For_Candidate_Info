@@ -12,7 +12,7 @@
                         <div class="alert alert-danger">{{$error}}</div>
                         @endforeach
                     @endif
-                   {!! Form::model($task, ['method' => 'put','url' => ['/candidate/award', $task->id]]) !!}
+                   {!! Form::model($award, ['method' => 'put','url' => ['/candidate/award', $award->id]]) !!}
                         <div class="form-group">
                             {!! Form::label('Award') !!}
                             {!! Form::text('award', null, 

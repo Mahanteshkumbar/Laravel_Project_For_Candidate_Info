@@ -6,7 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Add Languages</div>
                 <div class="panel-body"> 
-                  {!! Form::model($task, ['method' => 'put','url' => ['/candidate/languages', $task->id]]) !!}
+                  {!! Form::model($language, ['method' => 'put','url' => ['/candidate/languages', $language->id]]) !!}
 
                   <div class="form-group">
                       {!! Form::label('Language') !!}

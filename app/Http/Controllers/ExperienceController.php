@@ -15,20 +15,11 @@ class ExperienceController extends Controller
      * @return Response
      */
     public function index($id = null) {
-       // $regUserInfo = Experience::All();
-        //return view('getuser',compact('regUserInfo'));
-        //return $regUserInfo;
-        // if ($id == null) {
-        //     return RegisterController::orderBy('id', 'asc')->get();
-        // } else {
-        //     return $this->show($id);
-        // }
+       
     }
 
-    public function edit($id = null) {
-        $task = Experience::findOrFail($id);
-        return view('updateexp',compact('task'));
-       //return 'Hiiiii';
+    public function edit(Experience $experience) {
+        return view('updateexp',compact('experience'));
     }
 
     public function show($id){
@@ -54,34 +45,20 @@ class ExperienceController extends Controller
     }
 
     public function store(WorkexpCreateRequest $request){        
-        //return Auth::user()->id;
-        $values = $request->All();
-        $flash_message = 'Created successfully';
-        Experience::create([
-        'Company_name' => $request->get('Company_name'),
-        'Start_year' => $request->get('Start_year'),
-        'End_year' => $request->get('End_year'),        
-        'Designation' => $request->get('Designation'),
-        'Exp_summary' => $request->get('Exp_summary'),      
-        'users_id' => Auth::user()->id]);
+        Auth::user()->Experience()->create($request->All());
         flash()->success('New Experience Added!');
         return redirect('/');
-
-        //$inputs->save();
     }
 
 
-     public function editlang($id, WorkexpCreateRequest $request){
-        $task = Experience::findOrFail($id);        
-        $input = $request->all();
-        $task->fill($input)->save();
+     public function editlang(Experience $experience, WorkexpCreateRequest $request){
+        $experience->update($request->All());
         flash()->info('Experience Updated!');
         return redirect('/');
      }
 
-     public function deletelang($id){
-        $task = Experience::findOrFail($id);
-        $task->delete();
+     public function deletelang(Experience $experience){
+        $experience->delete();
         flash()->warning('Experience Deleted!');
         return redirect('/');
 

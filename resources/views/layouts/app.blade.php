@@ -53,9 +53,9 @@
     </style>
 </head>
 <body id="app-layout">
-    <div class"view_parent_image1">
+    <div class="view_parent_image1">
         @if (Auth::guest())
-          {{ Html::image('/images/2.jpg', 'logo',array( 'width' => '100%', 'height' => 320, 'class' => '' )) }}
+          {{ Html::image('/images/2.jpg', 'logo',array( 'width' => '100%', 'height' => 250, 'class' => '' )) }}
         @endif
       <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
