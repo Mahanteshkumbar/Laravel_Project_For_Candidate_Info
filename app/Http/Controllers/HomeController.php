@@ -35,9 +35,10 @@ class HomeController extends Controller
     public function editlang($id, Request $request){
         $task1 = User::findOrFail($id);  
         $task2 = Profile::findorFail($id);     
-        $input = $request->all();
-        $task1->fill($input)->save();
-        $task2->fill($input)->save();
+        //$input = $request->all();
+        $task1->update($request->all());
+        $task2->update($request->all());
+        flash()->success('Profile updated successfully!');
         return redirect('/');
      }
 

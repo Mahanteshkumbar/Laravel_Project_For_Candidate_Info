@@ -27,12 +27,10 @@ class LangaugeController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    protected function showTrashed($id)
+    protected function showTrashed(Language $language)
     {
-        $language_trashed_info = Language::onlyTrashed()
-                ->where('users_id', $id)
-                ->get();
-       return view('trashedlanguage',compact('language_trashed_info'));
+        $language_trashed_info = Auth::user()->Language()->onlyTrashed()->get();
+        return view('trashedlanguage',compact('language_trashed_info'));
     }
 
     protected function restoreTrashed($id)
@@ -63,5 +61,16 @@ class LangaugeController extends Controller
         return redirect('/');
 
      }
+
+     public function deletepermanently(){   
+        if(Auth::user()->Language()->onlyTrashed()->get()->count() > 0){
+            Auth::user()->Language()->onlyTrashed()->forceDelete();
+            flash()->warning('All Experience are Deleted permanently!');
+            return redirect('/'); 
+        }else{
+            flash()->warning('Nothing to delete!');
+            return redirect('/');
+        }
+    }
       
 }

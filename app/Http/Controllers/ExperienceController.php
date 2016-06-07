@@ -27,11 +27,9 @@ class ExperienceController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    protected function showTrashed($id)
+    protected function showTrashed(Experience $experience)
     {
-        $experience_trashed_info = Experience::onlyTrashed()
-                ->where('users_id', $id)
-                ->get();
+        $experience_trashed_info = Auth::user()->Experience()->onlyTrashed()->get();
        return view('trashedexperience',compact('experience_trashed_info'));
     }
 
@@ -61,6 +59,16 @@ class ExperienceController extends Controller
         $experience->delete();
         flash()->warning('Experience Deleted!');
         return redirect('/');
-
      }
+
+    public function deletepermanently(){   
+        if(Auth::user()->Experience()->onlyTrashed()->get()->count() > 0){
+            Auth::user()->Experience()->onlyTrashed()->forceDelete();
+            flash()->warning('All Experience are Deleted permanently!');
+            return redirect('/'); 
+        }else{
+            flash()->warning('Nothing to delete!');
+            return redirect('/');
+        }
+    }
 }

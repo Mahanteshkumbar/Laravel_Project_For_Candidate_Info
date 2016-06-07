@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/candidate/education', 'EducationController@store');
 	Route::get('/candidate/education/trashed/{id}','EducationController@showTrashed');
 	Route::get('/candidate/education/restoretrashed/{id}','EducationController@restoreTrashed');
+	Route::get('/candidate/deleteall/education','EducationController@deletepermanently');
 
 
 	//langauges
@@ -96,12 +97,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/candidate/languages', 'LangaugeController@store');
 	Route::get('/candidate/languages/trashed/{id}','LangaugeController@showTrashed');
 	Route::get('/candidate/languages/restoretrashed/{id}','LangaugeController@restoreTrashed');
+	Route::get('/candidate/deleteall/languages','LangaugeController@deletepermanently');
+
 
 	//Experience
 	Route::get('/candidate/experience', 'ExperienceController@show');
 	Route::get('/candidate/experienceview', function(){
-		$experience_info = Experience::where('users_id', '=', Auth::user()->id)->get();
-			
+		$experience_info = Experience::where('users_id', '=', Auth::user()->id)->get();			
 		return view('workexperience',compact('experience_info'));
 	});
 	//Route::get('/candidate/experience', 'ExperienceController@show');
@@ -111,6 +113,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/candidate/experience', 'ExperienceController@store');
 	Route::get('/candidate/experience/trashed/{id}','ExperienceController@showTrashed');
 	Route::get('/candidate/experience/restoretrashed/{id}','ExperienceController@restoreTrashed');
+	Route::get('/candidate/deleteall/experience','ExperienceController@deletepermanently');
 
 
 	//Skills
@@ -124,6 +127,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/candidate/skill', 'SkillController@store');
 	Route::get('/candidate/skill/trashed/{id}','SkillController@showTrashed');
 	Route::get('/candidate/skill/restoretrashed/{id}','SkillController@restoreTrashed');
+	Route::get('/candidate/deleteall/skill','SkillController@deletepermanently');
 
 	//Jobpost
 	Route::get('/candidate/jobpost', 'JobpostController@show');
@@ -136,7 +140,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/candidate/jobpost', 'JobpostController@store');
 	Route::get('/candidate/jobpost/trashed/{id}','JobpostController@showTrashed');
 	Route::get('/candidate/jobpost/restoretrashed/{id}','JobpostController@restoreTrashed');
-
+	Route::get('/candidate/deleteall/jobpost','JobpostController@deletepermanently');
 
 	//Hobby
 	//Route::get('/candidate/hobby', 'HobbyController@show');
@@ -151,6 +155,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/candidate/hobby/trashed/{id}','HobbyController@showTrashed');
 	Route::get('/candidate/hobby/restoretrashed/{id}','HobbyController@restoreTrashed');
 	Route::get('/candidate/deleteall/hobby','HobbyController@deletepermanently');
+
 	Route::get('/candidate/getRequest',function(){
 		if(Request::Ajax()){
 			return "Ajax request on the floor";
@@ -197,6 +202,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/candidate/award', 'AwardsController@store');
 	Route::get('/candidate/award/trashed/{id}','AwardsController@showTrashed');
 	Route::get('/candidate/award/restoretrashed/{id}','AwardsController@restoreTrashed');
+	Route::get('/candidate/deleteall/award','AwardsController@deletepermanently');
 
 	//Add new Tags 
 	Route::get('/candidate/tagview', function(){

@@ -7,8 +7,9 @@
             <h1>Restore Hobby <a class="navbar-brand" href="{{ url('/') }}">
                     Go back
                 </a></h1>
-                <h2><a href="{{ url('/candidate/deleteall/hobby') }}">Delete All Permanently</a></h2>
-            <div class="table-responsive">
+                <b><a style="color:red;" href="{{ url('/candidate/deleteall/hobby') }}">Delete All Permanently</a></b>            
+                
+          <div class="table-responsive">
              <table class="table table-bordered">
               <thead>
                 <tr>

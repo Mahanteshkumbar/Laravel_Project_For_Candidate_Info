@@ -27,14 +27,11 @@ class SkillController extends Controller
         $regUserInfo = Skills::findorFail($id);
         return view('showusers',compact('regUserInfo')); 
     }
-
     
-    protected function showTrashed($id)
+    protected function showTrashed(Skills $skill)
     {
-        $skills_trashed_info = Skills::onlyTrashed()
-                ->where('users_id', $id)
-                ->get();
-       return view('trashedskill',compact('skills_trashed_info'));
+        $skills_trashed_info = Auth::user()->Skills()->onlyTrashed()->get();
+        return view('trashedskill',compact('skills_trashed_info'));
     }
 
     protected function restoreTrashed($id)
@@ -63,4 +60,15 @@ class SkillController extends Controller
         flash()->warning('Skill Deleted!');
         return redirect('/');
      }
+
+     public function deletepermanently(){   
+        if(Auth::user()->Skills()->onlyTrashed()->get()->count() > 0){
+            Auth::user()->Skills()->onlyTrashed()->forceDelete();
+            flash()->warning('All Experience are Deleted permanently!');
+            return redirect('/'); 
+        }else{
+            flash()->warning('Nothing to delete!');
+            return redirect('/');
+        }
+    }
 }

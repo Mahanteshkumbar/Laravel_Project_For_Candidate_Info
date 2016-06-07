@@ -29,10 +29,8 @@ class EducationController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    protected function showTrashed($id) {
-        $education_trashed_info = Education::onlyTrashed()
-                ->where('users_id', $id)
-                ->get();
+    protected function showTrashed(Education $education) {
+        $education_trashed_info = Auth::user()->Education()->onlyTrashed()->get();
        return view('trashededucation',compact('education_trashed_info'));
     }
 
@@ -61,5 +59,16 @@ class EducationController extends Controller
         $education->delete();
         flash()->warning('Education Deleted!');
         return redirect('/');
+    }
+
+    public function deletepermanently(){   
+        if(Auth::user()->Education()->onlyTrashed()->get()->count() > 0){
+            Auth::user()->Education()->onlyTrashed()->forceDelete();
+            flash()->warning('All Experience are Deleted permanently!');
+            return redirect('/'); 
+        }else{
+            flash()->warning('Nothing to delete!');
+            return redirect('/');
+        }
     }
 }

@@ -32,21 +32,17 @@ class HobbyController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
 
-    protected function showTrashed($id) {
-        $hobby_trashed_info = Hobby::onlyTrashed()
-                ->where('users_id', $id)
-                ->get();
-       return view('trashed',compact('hobby_trashed_info'));
+    protected function showTrashed(Hobby $hobby) {
+        $hobby_trashed_info = Auth::user()->Hobby()->onlyTrashed()->get();
+        return view('trashed',compact('hobby_trashed_info'));
     }
 
-    protected function restoreTrashed($id)
-    {
+    protected function restoreTrashed($id) {
         $hobby_trashed_info = Hobby::onlyTrashed()
-                ->where('id', $id)
-                ->restore();
-                flash()->success('Hobby Restored!');
-                return redirect('/');
-       //return view('home');
+            ->where('id', $id)
+            ->restore();
+        flash()->success('Hobby Restored!');
+        return redirect('/');
     }
 
     public function store(HobbyCreateRequest $request){        
@@ -56,7 +52,6 @@ class HobbyController extends Controller
         flash()->success('New Hobby Added!');
         //session()->flash('flash_message','New Hobyy Added');
         return redirect('/');
-
         //$inputs->save();
     }
 
@@ -72,14 +67,15 @@ class HobbyController extends Controller
         return redirect('/');
     }
 
-    public function deletepermanently(){
-        //$hobby_delete_all = Auth::user()->Hobby; 
-        return "Hiii";
-        // $hobby_delete_all->forceDelete();      
-        // flash()->warning('All Hobbies are Deleted!');
-        // return redirect('/');
-        //return view('home');
-
-     }
+    public function deletepermanently(){   
+        if(Auth::user()->Hobby()->onlyTrashed()->get()->count() > 0){
+            Auth::user()->Hobby()->onlyTrashed()->forceDelete();
+            flash()->warning('All Hobbies are Deleted permanently!');
+            return redirect('/'); 
+        }else{
+            flash()->warning('Nothing to delete!');
+            return redirect('/');
+        }
+    }
 
 }

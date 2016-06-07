@@ -50,16 +50,26 @@ class JobpostController extends Controller
         return redirect('/');
     }
 
-
-     public function editlang(Jobpost $jobpost, Request $request){
+    public function editlang(Jobpost $jobpost, Request $request){
         $jobpost->update($request->All());
         flash()->info('Jobpost Updated');
         return redirect('/');
      }
 
-     public function deletelang(Jobpost $jobpost){
+    public function deletelang(Jobpost $jobpost){
         $jobpost->delete();
         flash()->warning('Jobpost Deleted!');
         return redirect('/');
+    }
+
+    public function deletepermanently(){   
+        if(Auth::user()->Jobpost()->onlyTrashed()->get()->count() > 0){
+            Auth::user()->Jobpost()->onlyTrashed()->forceDelete();
+            flash()->warning('All Experience are Deleted permanently!');
+            return redirect('/'); 
+        }else{
+            flash()->warning('Nothing to delete!');
+            return redirect('/');
+        }
     }
 }

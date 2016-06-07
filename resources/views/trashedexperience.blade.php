@@ -7,6 +7,7 @@
             <h1>Restore Experience<a class="navbar-brand" href="{{ url('/') }}">
                     Go back
                 </a></h1>
+                <b><a style="color:red;" href="{{ url('/candidate/deleteall/experience') }}">Delete All Permanently</a></b>
             <div class="table-responsive">
              <table class="table table-bordered">
               <thead>

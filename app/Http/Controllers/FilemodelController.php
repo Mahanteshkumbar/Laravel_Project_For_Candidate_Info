@@ -75,8 +75,5 @@ class FilemodelController extends Controller
     public function getDownload($id){       
         $file = Filemodel::findOrFail($id); 
         return response()->download($file->filepath);
-	}
-
-
-    
+	}    
 }

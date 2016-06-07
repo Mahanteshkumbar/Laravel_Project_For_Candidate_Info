@@ -24,8 +24,15 @@ class HobbyCreateRequest extends Request
     public function rules()
     {
         return [
-            //
-            'hname' => 'required'
+            'hname' => 'required|min:05'
+        ];
+    }
+
+    //handling custom error messages 
+    public function messages(){
+        return [
+            'hname.required' => 'Hobby is required!',
+            'hname.min' => 'Hobby must be at least 05 characters.!',
         ];
     }
 }

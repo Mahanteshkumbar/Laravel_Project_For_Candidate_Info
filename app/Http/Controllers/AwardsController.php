@@ -30,11 +30,9 @@ class AwardsController extends Controller
         return view('showusers',compact('regUserInfo')); 
     }
     
-    protected function showTrashed($id)
+    protected function showTrashed(Awards $award)
     {
-        $award_trashed_info = Awards::onlyTrashed()
-                ->where('users_id', $id)
-                ->get();
+        $award_trashed_info = Auth::user()->Awards()->onlyTrashed()->get();
        return view('trashedaward',compact('award_trashed_info'));
     }
 
@@ -72,5 +70,16 @@ class AwardsController extends Controller
         flash()->warning('Award Deleted!');
         return redirect('/');
      }
+
+     public function deletepermanently(){   
+        if(Auth::user()->Awards()->onlyTrashed()->get()->count() > 0){
+            Auth::user()->Awards()->onlyTrashed()->forceDelete();
+            flash()->warning('All Experience are Deleted permanently!');
+            return redirect('/'); 
+        }else{
+            flash()->warning('Nothing to delete!');
+            return redirect('/');
+        }
+    }
 
 }

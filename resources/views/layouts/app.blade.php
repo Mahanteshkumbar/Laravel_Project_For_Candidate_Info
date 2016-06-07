@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
@@ -35,7 +37,7 @@
            top: 0px; 
            left: 0; 
            width: 100%;
-           background-color: rgba(41, 128, 185,0.8);
+           background-color: rgba(41, 128, 185,0.7);
         }
         .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
             color: #ecf0f1;  /*Sets the text hover color on navbar*/
@@ -48,79 +50,81 @@
         .navbar-default .navbar-nav>li>a{ 
             font-family: "Arial", Helvetica, sans-serif;           
             color: #f1c40f;
-        }
+        }    
 
     </style>
 </head>
 <body id="app-layout">
-    <div class="view_parent_image1">
-        @if (Auth::guest())
-          {{ Html::image('/images/2.jpg', 'logo',array( 'width' => '100%', 'height' => 250, 'class' => '' )) }}
-        @endif
-      <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+     <div class="outer">
+        <!-- <p>(text to appear at the bottom left of the image)</p> -->
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
-                </a>
-            </div>
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        Laravel
+                    </a>
+                </div>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <!-- <li><a href="{{ url('/home') }}">Home</a></li> -->
-                </ul>
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        <!-- <li><a href="{{ url('/home') }}">Home</a></li> -->
+                    </ul>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}" class="color-me">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                        <li><a href="{{ url('/admin/login') }}">Admin Login</a></li>
-                        <li><a href="{{ url('admin/register') }}">Admin Register</a></li>
-                        <li><a href="{{ url('/register/candidate') }}">Candidate Register</a></li>
-                        <li><a href="{{url('/candidate/searchjobview')}}">Search Job</a></li>
-                    @else
-                        <li><a href="{{url('/candidate/searchjobview')}}">Search Job</a></li>
-                        
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li><a href="{{ url('/login') }}" class="color-me">Login</a></li>
+                            <li><a href="{{ url('/register') }}">Register</a></li>
+                            <li><a href="{{ url('/admin/login') }}">Admin Login</a></li>
+                            <li><a href="{{ url('admin/register') }}">Admin Register</a></li>
+                            <li><a href="{{ url('/register/candidate') }}">Candidate Register</a></li>
+                            <li><a href="{{url('/candidate/searchjobview')}}">Search Job</a></li>
+                        @else
+                            <li><a href="{{url('/candidate/searchjobview')}}">Search Job</a></li>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        @if(Auth::guard('admin')->user())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::guard('admin')->user()->name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/admin/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
-                    @endif
-
-                    @if(Auth::guard('admin')->user())
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::guard('admin')->user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/admin/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                        </ul>
-                    </li>
-                    @endif
-                </ul>
+                        @endif
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+            @if (Auth::guest())
+              {{ Html::image('/images/2.jpg', 'logo',array( 'width' => '100%', 'height' => 250, 'class' => '' )) }}
+            @endif
+        </nav>
     </div>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -136,14 +140,15 @@
             </div>
         </div>
     </div>
-    @yield('content')
-
+       @yield('content')
     <!-- JavaScripts -->    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     <script type="text/javascript">
-        $('div.alert').fadeOut(5000);
+        $('div.alert').fadeOut(3000);
     </script>
 </body>
 </html>
