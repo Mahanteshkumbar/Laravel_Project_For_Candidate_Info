@@ -292,7 +292,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Hobby <a  style="display:inline-block;padding:right:10px;" title="Click !" href="{{ url('/candidate/hobbyview') }}" id="getRequest">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/hobby/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a></h1>
+                    <h1>Hobby <a  style="display:inline-block;padding:right:10px;" title="Click !" href="{{ url('/candidate/hobbyview') }}" id="getRequest">Add New</a> <a  style="display:inline-block;padding:right:10px;" title="Click get trashed values!" href="{{ url('/candidate/hobby/trashed/'.Auth::user()->id) }}"><i class="fa fa-trash"></i></a> <a href="{{url('/getlogs')}}">Get Logs for hoby</a></h1>
 
                     <div class="table-responsive">
                      <table class="table table-bordered">
@@ -403,7 +403,9 @@
   <div class="row">
     <div class="col-md-4">
       <h3><a href="{{url('/candidate/searchjobview')}}">Search Job</a></h3>
+      @if (!Auth::guest())
       <h4><a href="{{url('/dashboard')}}">Please login to see output DI(Dependency Ejection)(Middlware Applied)</a></h4>
+      @endif
     </div>
   </div>
 </div>

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Events\SomeEvent;
 use Auth;
 use App\Awards;
 use App\Tag;
 use App\Http\Requests;
 use App\Http\Requests\AwardCreateRequest;
+use Event;
+use App\User;
 
 class AwardsController extends Controller
 {
@@ -52,6 +55,7 @@ class AwardsController extends Controller
 
         $awards = Auth::user()->Awards()->create($request->all());
         $awards->tags()->sync($request->input('tags'),false);
+        $response = Event::fire(new SomeEvent(Auth::user()));
         flash()->success('New Award Added!');
         return redirect('/');
     }

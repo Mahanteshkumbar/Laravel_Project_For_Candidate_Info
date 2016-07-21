@@ -59,6 +59,7 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'auth'], function () {  
 
 	Route::get('/home', 'HomeController@index');
+	Route::get('/getlogs', 'HobbyController@index');
 	Route::get('/register/candidate', function () {
 	    return view('candreg');
 	});

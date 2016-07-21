@@ -7,6 +7,8 @@ use Auth;
 use App\Http\Requests\HobbyCreateRequest;
 use App\Hobby;
 use App\Http\Controllers\session;
+use OwenIt\Auditing\Log;
+use Illuminate\Support\Collection;
 
 class HobbyController extends Controller
 {
@@ -18,9 +20,12 @@ class HobbyController extends Controller
      *
      * @return Response
      */
-    public function index($id = null) {
-       
+    public function index()
+    {
+        $logs = Log::orderBy('created_at', 'desc')->get();
+        return view('hobbyhistory',compact('logs'));
     }
+    
 
     public function edit(Hobby $hobby) {
         return view('updatehobby',compact('hobby'));
