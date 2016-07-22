@@ -208,15 +208,18 @@
                           <td>{{$skill->skill}}</td>
                           <td>{{$skill->efficiency}}</td>
                           <td>{{$skill->yoe}}</td>
-                          <td>
+                          <td width="60%">
+                            <p>
                             <a  style="display:inline-block;padding:right:10px;" title="Click this to edit!" href="{{ url('/candidate/skill/'.$skill->id) }}"><i class="fa fa-pencil"></i></a>
 
-                                <p style="display:inline-block;padding:right:10px;">{!! Form::open([
+                                {!! Form::open([
                                     'method' => 'DELETE',
                                     'url' => ['/candidate/del/skill',$skill->id]
                                 ]) !!}
                                     {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                 {!! Form::close() !!}
+
+                                <a href="{{url('/getrevisions/'.$skill->id)}}">Get revisionable logs</a>
                                 </p>
                            </td>
                         </tr>

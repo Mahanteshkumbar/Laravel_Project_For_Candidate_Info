@@ -15,8 +15,13 @@ class SkillController extends Controller
      *
      * @return Response
      */
-    public function index($id = null) {
-       
+    public function index($id) {
+        $article = Skills::find($id);
+        //return $article;
+        $logs = $article->revisionHistory;
+        //return $logs;
+       //$logs = revisions::orderBy('created_at', 'desc')->get();
+        return view('skillhistory',compact('logs'));
     }
 
     public function edit(Skills $skill) {

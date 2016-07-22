@@ -59,7 +59,13 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'auth'], function () {  
 
 	Route::get('/home', 'HomeController@index');
+	
+	//get logs of hobies by auditingtrait library
 	Route::get('/getlogs', 'HobbyController@index');
+
+	//get revisions by veturecraft revisionable
+	Route::get('/getrevisions/{id}', 'SkillController@index');
+	
 	Route::get('/register/candidate', function () {
 	    return view('candreg');
 	});

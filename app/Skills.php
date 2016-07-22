@@ -14,19 +14,13 @@ class Skills extends Model
     * override the boot method in your mode
     */
     use \Venturecraft\Revisionable\RevisionableTrait;
-
-    public static function boot()
-    {
-        parent::boot();
-    }
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     use SoftDeletes;
-    
+  
     protected $fillable = [
          'skill','efficiency','yoe','users_id'
     ];	
